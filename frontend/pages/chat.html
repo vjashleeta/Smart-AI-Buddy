@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d34">
+  <title>AI buddy | Smart AI Buddy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="site-nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">S</span><span>smart<span class="brand-light">buddy</span></span></a>
+      <p class="nav-caption">YOUR WORKSPACE</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="../index.html"><span class="nav-icon">01</span>Overview</a>
+        <a class="nav-link" href="dashboard.html"><span class="nav-icon">02</span>Dashboard</a>
+        <a class="nav-link" href="planner.html"><span class="nav-icon">03</span>Study planner</a>
+        <a class="nav-link is-active" href="chat.html" aria-current="page"><span class="nav-icon">04</span>AI buddy</a>
+        <a class="nav-link" href="socratic.html"><span class="nav-icon">05</span>Socratic tutor</a>
+        <a class="nav-link" href="resources.html"><span class="nav-icon">06</span>Resources</a>
+        <a class="nav-link" href="quiz.html"><span class="nav-icon">07</span>Quick quiz</a>
+        <a class="nav-link" href="performance.html"><span class="nav-icon">08</span>Performance</a>
+      </nav>
+      <p class="nav-caption nav-caption-lower">ACCOUNT</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="upload.html"><span class="nav-icon">+</span>Upload notes</a>
+        <a class="nav-link" href="settings.html"><span class="nav-icon">09</span>Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>Learning mode</span><span class="status-label">ON</span></div>
+    </aside>
+    <div class="mobile-scrim" data-close-nav></div>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-menu-toggle><span></span><span></span><span></span></button>
+        <div class="breadcrumb">Workspace <span>/</span> AI buddy</div>
+        <div class="topbar-actions"><span class="today-label" data-current-date></span><a class="avatar" href="settings.html" aria-label="Account settings">A</a></div>
+      </header>
+      <div class="page-content">
+        <section class="page-title-row">
+          <div>
+            <p class="eyebrow">A FRIENDLY PLACE TO ASK</p>
+            <h1>Talk it through</h1>
+            <p class="intro-copy">Ask about a concept, compare ideas, or get help figuring out what to study next.</p>
+          </div>
+          <a class="button button-outline" href="socratic.html">Try Socratic mode <span aria-hidden="true">→</span></a>
+        </section>
+        <section class="panel">
+          <div class="chat-history-controls">
+            <label for="chat-conversation-select">Conversation</label>
+            <select id="chat-conversation-select" data-chat-conversations aria-label="Select a conversation">
+              <option value="">Loading conversations...</option>
+            </select>
+            <button class="button button-outline button-small" type="button" data-new-conversation>New conversation</button>
+          </div>
+          <div class="chat-window">
+            <div class="chat-log" data-chat-log aria-label="Conversation" aria-live="polite">
+              <p class="muted" data-chat-empty>Ask AI Buddy a question to get started.</p>
+            </div>
+            <form class="chat-compose" data-chat-form>
+              <label class="sr-only" for="message">Your question</label>
+              <input id="message" name="message" maxlength="4000" autocomplete="off" placeholder="Ask a study question..." required>
+              <button class="button button-dark button-small" type="submit" aria-label="Send message">Send <span aria-hidden="true">→</span></button>
+            </form>
+            <p class="form-message" data-chat-status role="status" aria-live="polite"></p>
+            <p class="form-note" data-learning-time-status role="status" aria-live="polite">Active learning time is tracked while this page is visible and recently in use.</p>
+            <p class="form-note">Your conversations are saved to your account so you can return to them later.</p>
+          </div>
+        </section>
+        <footer class="page-footer"><span>SMART AI BUDDY</span><span>Curiosity is a good place to begin.</span></footer>
+      </div>
+    </main>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </div>
+</body>
+</html>

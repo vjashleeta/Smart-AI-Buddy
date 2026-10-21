@@ -1,0 +1,1 @@
+package com.smartai.buddy.config;

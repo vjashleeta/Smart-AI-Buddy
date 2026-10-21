@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d34">
+  <meta name="description" content="Your calm, organized space for learning with Smart AI Buddy.">
+  <title>Overview | Smart AI Buddy</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="site-nav" aria-label="Main navigation">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">S</span><span>smart<span class="brand-light">buddy</span></span></a>
+      <p class="nav-caption">YOUR WORKSPACE</p>
+      <nav class="nav-list">
+        <a class="nav-link is-active" href="index.html" aria-current="page"><span class="nav-icon">01</span>Overview</a>
+        <a class="nav-link" href="pages/dashboard.html"><span class="nav-icon">02</span>Dashboard</a>
+        <a class="nav-link" href="pages/planner.html"><span class="nav-icon">03</span>Study planner</a>
+        <a class="nav-link" href="pages/chat.html"><span class="nav-icon">04</span>AI buddy</a>
+        <a class="nav-link" href="pages/socratic.html"><span class="nav-icon">05</span>Socratic tutor</a>
+        <a class="nav-link" href="pages/resources.html"><span class="nav-icon">06</span>Resources</a>
+        <a class="nav-link" href="pages/quiz.html"><span class="nav-icon">07</span>Quick quiz</a>
+        <a class="nav-link" href="pages/performance.html"><span class="nav-icon">08</span>Performance</a>
+      </nav>
+      <p class="nav-caption nav-caption-lower">ACCOUNT</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="pages/upload.html"><span class="nav-icon">+</span>Upload notes</a>
+        <a class="nav-link" href="pages/settings.html"><span class="nav-icon">09</span>Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>Learning mode</span><span class="status-label">ON</span></div>
+    </aside>
+    <div class="mobile-scrim" data-close-nav></div>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-menu-toggle><span></span><span></span><span></span></button>
+        <div class="breadcrumb">Workspace <span>/</span> Overview</div>
+        <div class="topbar-actions"><span class="today-label" data-current-date></span><a class="avatar" href="pages/settings.html" aria-label="Account settings">A</a></div>
+      </header>
+      <div class="page-content">
+        <section class="welcome-row">
+          <div><p class="eyebrow" data-current-day-heading></p><h1>A good day to <em>make progress.</em></h1><p class="intro-copy">Your learning space is ready when you are. Pick up where you left off or make a small plan for today.</p></div>
+          <a class="button button-dark" href="pages/planner.html">Plan my day <span aria-hidden="true">→</span></a>
+        </section>
+        <section class="overview-grid" aria-label="Today's study overview">
+          <article class="panel focus-panel"><div class="panel-top"><div><p class="eyebrow">TODAY'S FOCUS</p><h2 data-overview-focus-heading>Your next useful step</h2></div><span class="sun-badge" aria-hidden="true">★</span></div><p class="muted" data-overview-focus-text>Loading your study activity and upcoming plan...</p><div class="focus-progress"><div class="progress-meta"><span>Weekly goal <span data-overview-goal-label>(6 hours)</span></span><strong data-overview-weekly-goal>— of — hours</strong></div><div class="progress-track"><span data-overview-goal-progress style="width:0%"></span></div></div><p class="muted overview-streak" data-overview-streak>Current study streak: — days</p><a class="text-link" href="pages/planner.html">View your plan <span aria-hidden="true">→</span></a></article>
+          <article class="panel time-panel"><p class="eyebrow">TIME WELL SPENT</p><div class="stat-number" data-overview-time>—</div><p class="muted">Server-timed active use of AI Buddy, Socratic Tutor, and Quiz, plus student-reported completed planner minutes. Overlaps count once.</p><div class="mini-bars" aria-label="Measured learning activity this week" data-overview-weekly-bars></div><div class="bar-labels" data-overview-weekly-labels></div></article>
+        </section>
+        <section class="section-block"><div class="section-heading"><div><p class="eyebrow">PICK UP WHERE YOU LEFT OFF</p><h2>Your learning corner</h2></div><a class="text-link" href="pages/resources.html">All resources <span aria-hidden="true">→</span></a></div>
+          <div class="learning-grid">
+            <a class="learning-card card-mint" href="pages/chat.html"><span class="card-index">01 / ASK</span><span class="card-symbol" aria-hidden="true">?</span><h3>Talk it through</h3><p>Untangle a tricky concept with your AI study buddy.</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+            <a class="learning-card card-peach" href="pages/socratic.html"><span class="card-index">02 / EXPLORE</span><span class="card-symbol" aria-hidden="true">↗</span><h3>Think deeper</h3><p>Build understanding one thoughtful question at a time.</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+            <a class="learning-card card-lilac" href="pages/quiz.html"><span class="card-index">03 / PRACTICE</span><span class="card-symbol" aria-hidden="true">✓</span><h3>Test your recall</h3><p>Try a short quiz and see what has really stuck.</p><span class="card-arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+        <section class="section-block lower-grid">
+          <article class="panel next-panel"><div class="section-heading compact"><div><p class="eyebrow">UP NEXT</p><h2>On your planner</h2></div><a class="text-link" href="pages/planner.html">Open planner <span aria-hidden="true">→</span></a></div><div data-overview-upcoming aria-live="polite"><p class="muted">Loading planned sessions...</p></div></article>
+          <article class="quote-panel"><p class="eyebrow">A NOTE TO SELF</p><blockquote>“Small steps every day add up to big change.”</blockquote><span class="quote-rule"></span><p class="quote-credit">Make today count, at your own pace.</p><a href="pages/performance.html" class="text-link">See your progress <span aria-hidden="true">→</span></a></article>
+        </section>
+        <p class="form-message overview-data-status" data-overview-status role="status" aria-live="polite"></p>
+        <footer class="page-footer"><span>SMART AI BUDDY</span><span>A little progress is still progress.</span></footer>
+      </div>
+    </main>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </div>
+</body>
+</html>

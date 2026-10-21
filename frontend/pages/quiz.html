@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d34">
+  <title>Quick quiz | Smart AI Buddy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="site-nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">S</span><span>smart<span class="brand-light">buddy</span></span></a>
+      <p class="nav-caption">YOUR WORKSPACE</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="../index.html"><span class="nav-icon">01</span>Overview</a>
+        <a class="nav-link" href="dashboard.html"><span class="nav-icon">02</span>Dashboard</a>
+        <a class="nav-link" href="planner.html"><span class="nav-icon">03</span>Study planner</a>
+        <a class="nav-link" href="chat.html"><span class="nav-icon">04</span>AI buddy</a>
+        <a class="nav-link" href="socratic.html"><span class="nav-icon">05</span>Socratic tutor</a>
+        <a class="nav-link" href="resources.html"><span class="nav-icon">06</span>Resources</a>
+        <a class="nav-link is-active" href="quiz.html" aria-current="page"><span class="nav-icon">07</span>Quick quiz</a>
+        <a class="nav-link" href="performance.html"><span class="nav-icon">08</span>Performance</a>
+      </nav>
+      <p class="nav-caption nav-caption-lower">ACCOUNT</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="upload.html"><span class="nav-icon">+</span>Upload notes</a>
+        <a class="nav-link" href="settings.html"><span class="nav-icon">09</span>Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>Learning mode</span><span class="status-label">ON</span></div>
+    </aside>
+    <div class="mobile-scrim" data-close-nav></div>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-menu-toggle><span></span><span></span><span></span></button>
+        <div class="breadcrumb">Workspace <span>/</span> Quick quiz</div>
+        <div class="topbar-actions"><span class="today-label" data-current-date></span><a class="avatar" href="settings.html" aria-label="Account settings">A</a></div>
+      </header>
+      <div class="page-content" data-quiz-page>
+        <section class="page-title-row">
+          <div>
+            <p class="eyebrow">PRACTICE FROM YOUR STUDY MATERIAL</p>
+            <h1>Quick quiz</h1>
+            <p class="intro-copy">Add material you have studied. AI creates multiple-choice questions grounded in your notes and topic.</p>
+          </div>
+          <span class="pill" data-quiz-mastery>Mastery: 2 consecutive correct answers per concept</span>
+        </section>
+        <section class="content-grid">
+          <article class="panel">
+            <p class="eyebrow">ADD STUDIED MATERIAL</p>
+            <h2>What have you studied?</h2>
+            <p class="muted">Paste notes or a short passage you have actually studied. Questions are generated from the saved topic and source material.</p>
+            <form class="form-stack" data-quiz-material-form>
+              <div class="form-field"><label for="quiz-topic">Topic</label><input id="quiz-topic" name="topic" data-quiz-topic-input maxlength="200" placeholder="e.g. Cell biology" required></div>
+              <p class="form-note" data-quiz-topic-limit>Topics may be up to 200 characters.</p>
+              <div class="form-field"><label for="quiz-source">Paste studied text</label><textarea id="quiz-source" name="sourceText" maxlength="12000" rows="6" placeholder="Paste the statements you have studied..." required></textarea></div>
+              <p class="form-note">Quiz questions use AI-generated answer choices and are grounded in your saved material.</p>
+              <button class="button button-light" type="submit">Save pasted material <span aria-hidden="true">→</span></button>
+              <p class="form-message" data-quiz-material-message role="status" aria-live="polite"></p>
+            </form>
+            <form class="form-stack" data-quiz-pdf-form style="margin-top:20px">
+              <div class="form-field"><label for="quiz-pdf-topic">Topic</label><input id="quiz-pdf-topic" name="topic" data-quiz-topic-input maxlength="200" placeholder="e.g. Cell biology" required></div>
+              <p class="form-note" data-quiz-topic-limit>Topics may be up to 200 characters.</p>
+              <div class="form-field">
+                <label for="quiz-pdf">Or upload a study PDF</label>
+                <input id="quiz-pdf" name="file" type="file" accept="application/pdf,.pdf" required>
+              </div>
+              <p class="form-note" data-quiz-pdf-limit>PDFs up to 20 MB, 300 pages, and 12,000 extracted characters. Scanned/image-only PDFs are not supported. Files are processed in memory and are not stored.</p>
+              <button class="button button-light" type="submit">Extract text and save <span aria-hidden="true">→</span></button>
+              <p class="form-message" data-quiz-pdf-message role="status" aria-live="polite"></p>
+            </form>
+          </article>
+          <article class="panel">
+            <div class="section-heading"><div><p class="eyebrow">YOUR MATERIALS</p><h2>Choose a study source</h2></div></div>
+            <p class="muted">Select one material to see its progress and use it for your next quiz. Materials are never combined automatically.</p>
+            <div class="list-rows" data-quiz-materials aria-live="polite"><p class="muted">Loading your materials...</p></div>
+            <p class="form-message" data-quiz-delete-message role="status" aria-live="polite"></p>
+            <div class="section-heading section-block"><div><p class="eyebrow">SELECTED SOURCE</p><h2>Concept progress</h2></div></div>
+            <div class="list-rows" data-quiz-progress aria-live="polite"><p class="muted">Loading your progress...</p></div>
+            <p class="form-note">Concepts come only from material you marked studied. Untested concepts are shown separately; mastery is per concept, not per subject. A later incorrect answer removes mastery and schedules revision.</p>
+          </article>
+        </section>
+        <section class="content-grid section-block">
+          <article class="panel">
+            <div class="section-heading">
+              <div>              <p class="eyebrow">MULTIPLE-CHOICE PRACTICE</p><h2 data-quiz-heading>Ready to start?</h2></div>
+              <span class="pill" data-quiz-question-count>No active quiz</span>
+            </div>
+            <button class="button button-dark" type="button" data-quiz-start disabled>Start Quiz</button>
+            <p class="muted" data-quiz-prompt>Add and mark material as studied to build a quiz from your own notes.</p>
+            <form class="form-stack" data-quiz-answer-form hidden>
+              <fieldset class="quiz-option-group">
+                <legend>Choose one answer</legend>
+                <div class="quiz-options" data-quiz-options></div>
+              </fieldset>
+              <button class="button button-light" type="submit">Submit answer <span aria-hidden="true">→</span></button>
+            </form>
+            <p class="form-message" data-quiz-feedback role="status" aria-live="polite"></p>
+            <p class="form-note" data-learning-time-status role="status" aria-live="polite">Active learning time is tracked while this page is visible and recently in use.</p>
+            <div class="progress-track" style="margin-top:24px"><span data-quiz-progress-bar style="width:0%"></span></div>
+            <p class="form-note quiz-score-status" data-quiz-score></p>
+            <section class="quiz-result" data-quiz-result-panel aria-labelledby="quiz-result-title" aria-live="polite" tabindex="-1" hidden>
+              <p class="eyebrow">FINAL RESULT</p>
+              <h3 id="quiz-result-title" class="sr-only">Quiz result</h3>
+              <p class="quiz-result-score" data-quiz-result-score></p>
+              <p class="quiz-result-detail" data-quiz-result-detail></p>
+            </section>
+            <button class="button button-light" type="button" data-quiz-next hidden>Next Question</button>
+            <button class="button button-light" type="button" data-quiz-result hidden>See Result</button>
+          </article>
+          <article class="panel">
+            <p class="eyebrow">HOW IT ADAPTS</p>
+            <h2>Practice what needs attention</h2>
+            <p class="muted">New concepts are selected first, followed by concepts needing revision. A concept is mastered only after the configured consecutive-correct threshold.</p>
+            <a class="button button-light" href="planner.html">Plan a review <span aria-hidden="true">→</span></a>
+          </article>
+        </section>
+        <footer class="page-footer"><span>SMART AI BUDDY</span><span>Practice is progress, even when you miss one.</span></footer>
+      </div>
+    </main>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </div>
+</body>
+</html>

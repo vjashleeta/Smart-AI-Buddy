@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d34">
+  <title>Socratic tutor | Smart AI Buddy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="site-nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">S</span><span>smart<span class="brand-light">buddy</span></span></a>
+      <p class="nav-caption">YOUR WORKSPACE</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="../index.html"><span class="nav-icon">01</span>Overview</a>
+        <a class="nav-link" href="dashboard.html"><span class="nav-icon">02</span>Dashboard</a>
+        <a class="nav-link" href="planner.html"><span class="nav-icon">03</span>Study planner</a>
+        <a class="nav-link" href="chat.html"><span class="nav-icon">04</span>AI buddy</a>
+        <a class="nav-link is-active" href="socratic.html" aria-current="page"><span class="nav-icon">05</span>Socratic tutor</a>
+        <a class="nav-link" href="resources.html"><span class="nav-icon">06</span>Resources</a>
+        <a class="nav-link" href="quiz.html"><span class="nav-icon">07</span>Quick quiz</a>
+        <a class="nav-link" href="performance.html"><span class="nav-icon">08</span>Performance</a>
+      </nav>
+      <p class="nav-caption nav-caption-lower">ACCOUNT</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="upload.html"><span class="nav-icon">+</span>Upload notes</a>
+        <a class="nav-link" href="settings.html"><span class="nav-icon">09</span>Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>Learning mode</span><span class="status-label">ON</span></div>
+    </aside>
+    <div class="mobile-scrim" data-close-nav></div>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-menu-toggle><span></span><span></span><span></span></button>
+        <div class="breadcrumb">Workspace <span>/</span> Socratic tutor</div>
+        <div class="topbar-actions"><span class="today-label" data-current-date></span><a class="avatar" href="settings.html" aria-label="Account settings">A</a></div>
+      </header>
+      <div class="page-content" data-socratic-tutor>
+        <section class="page-title-row">
+          <div>
+            <p class="eyebrow">LEARN BY FOLLOWING THE WHY</p>
+            <h1>Socratic tutor</h1>
+            <p class="intro-copy">Work through a topic one thought at a time. Your tutor will guide you with questions and hints before explaining when you need it.</p>
+          </div>
+          <span class="pill">Guided practice</span>
+        </section>
+        <section class="panel">
+          <div class="socratic-toolbar">
+            <p class="form-note">This session stays in this page and is not saved.</p>
+            <button class="button button-outline button-small" type="button" data-socratic-reset>Start a new topic</button>
+          </div>
+          <div class="chat-window">
+            <div class="chat-log" data-socratic-log aria-label="Tutor conversation" aria-live="polite">
+              <p class="muted" data-socratic-empty>What would you like to understand? Share a topic or question to begin.</p>
+            </div>
+            <form class="chat-compose socratic-compose" data-socratic-form>
+              <label class="sr-only" for="socratic-message">Your topic, question, or response</label>
+              <textarea id="socratic-message" name="message" maxlength="4000" rows="2" placeholder="Enter a topic, question, or your reasoning..." required></textarea>
+              <div class="socratic-actions">
+                <button class="button button-outline button-small" type="button" data-socratic-hint disabled>Ask for a hint</button>
+                <button class="button button-dark button-small" type="submit" data-socratic-send>Start learning <span aria-hidden="true">→</span></button>
+              </div>
+            </form>
+            <p class="form-message" data-socratic-status role="status" aria-live="polite"></p>
+            <p class="form-note" data-learning-time-status role="status" aria-live="polite">Active learning time is tracked while this page is visible and recently in use.</p>
+          </div>
+        </section>
+        <footer class="page-footer"><span>SMART AI BUDDY</span><span>Good questions make strong foundations.</span></footer>
+      </div>
+    </main>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </div>
+</body>
+</html>

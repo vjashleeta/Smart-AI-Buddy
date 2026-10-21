@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d34">
+  <title>Study planner | Smart AI Buddy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="site-nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">S</span><span>smart<span class="brand-light">buddy</span></span></a>
+      <p class="nav-caption">YOUR WORKSPACE</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="../index.html"><span class="nav-icon">01</span>Overview</a>
+        <a class="nav-link" href="dashboard.html"><span class="nav-icon">02</span>Dashboard</a>
+        <a class="nav-link is-active" href="planner.html" aria-current="page"><span class="nav-icon">03</span>Study planner</a>
+        <a class="nav-link" href="chat.html"><span class="nav-icon">04</span>AI buddy</a>
+        <a class="nav-link" href="socratic.html"><span class="nav-icon">05</span>Socratic tutor</a>
+        <a class="nav-link" href="resources.html"><span class="nav-icon">06</span>Resources</a>
+        <a class="nav-link" href="quiz.html"><span class="nav-icon">07</span>Quick quiz</a>
+        <a class="nav-link" href="performance.html"><span class="nav-icon">08</span>Performance</a>
+      </nav>
+      <p class="nav-caption nav-caption-lower">ACCOUNT</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="upload.html"><span class="nav-icon">+</span>Upload notes</a>
+        <a class="nav-link" href="settings.html"><span class="nav-icon">09</span>Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>Learning mode</span><span class="status-label">ON</span></div>
+    </aside>
+    <div class="mobile-scrim" data-close-nav></div>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-menu-toggle><span></span><span></span><span></span></button>
+        <div class="breadcrumb">Workspace <span>/</span> Study planner</div>
+        <div class="topbar-actions"><span class="today-label" data-current-date></span><a class="avatar" href="settings.html" aria-label="Account settings">A</a></div>
+      </header>
+      <div class="page-content">
+        <section class="page-title-row">
+          <div><p class="eyebrow">MAKE SPACE FOR WHAT MATTERS</p><h1>Study planner</h1><p class="intro-copy">A flexible plan beats a perfect plan. Start with the next useful thing.</p></div>
+          <button class="button button-dark" type="button" data-focus-session-form>＋ Add a session</button>
+        </section>
+        <section class="content-grid">
+          <article class="panel">
+            <div class="section-heading">
+              <div><p class="eyebrow">YOUR SAVED SESSIONS</p><h2>Your plan</h2></div>
+              <span class="pill" data-planner-count>0 sessions</span>
+            </div>
+            <div class="list-rows" data-planner-sessions aria-live="polite">
+              <p class="muted" data-planner-empty>Loading your saved sessions...</p>
+            </div>
+          </article>
+          <article class="panel">
+            <p class="eyebrow">ADD A STUDY SESSION</p>
+            <h2>Make a little room</h2>
+            <form class="form-stack" data-planner-form>
+              <div class="form-field"><label for="subject">Subject</label><input id="subject" name="subject" maxlength="120" placeholder="e.g. Machine Learning" required></div>
+              <div class="form-field"><label for="session-date">Date</label><input id="session-date" name="sessionDate" type="date" required></div>
+              <div class="form-field">
+                <label for="duration">Duration</label>
+                <select id="duration" name="durationMinutes">
+                  <option value="25">25 minutes</option>
+                  <option value="45" selected>45 minutes</option>
+                  <option value="60">60 minutes</option>
+                </select>
+              </div>
+              <button class="button button-light" type="submit">Add to plan <span aria-hidden="true">→</span></button>
+              <p class="form-message" data-form-message role="status" aria-live="polite"></p>
+            </form>
+          </article>
+        </section>
+        <footer class="page-footer"><span>SMART AI BUDDY</span><span>Leave a little breathing room in your day.</span></footer>
+      </div>
+    </main>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </div>
+</body>
+</html>

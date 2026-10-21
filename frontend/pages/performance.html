@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d34">
+  <title>Performance | Smart AI Buddy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="site-nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">S</span><span>smart<span class="brand-light">buddy</span></span></a>
+      <p class="nav-caption">YOUR WORKSPACE</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="../index.html"><span class="nav-icon">01</span>Overview</a>
+        <a class="nav-link" href="dashboard.html"><span class="nav-icon">02</span>Dashboard</a>
+        <a class="nav-link" href="planner.html"><span class="nav-icon">03</span>Study planner</a>
+        <a class="nav-link" href="chat.html"><span class="nav-icon">04</span>AI buddy</a>
+        <a class="nav-link" href="socratic.html"><span class="nav-icon">05</span>Socratic tutor</a>
+        <a class="nav-link" href="resources.html"><span class="nav-icon">06</span>Resources</a>
+        <a class="nav-link" href="quiz.html"><span class="nav-icon">07</span>Quick quiz</a>
+        <a class="nav-link is-active" href="performance.html" aria-current="page"><span class="nav-icon">08</span>Performance</a>
+      </nav>
+      <p class="nav-caption nav-caption-lower">ACCOUNT</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="upload.html"><span class="nav-icon">+</span>Upload notes</a>
+        <a class="nav-link" href="settings.html"><span class="nav-icon">09</span>Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>Learning mode</span><span class="status-label">ON</span></div>
+    </aside>
+    <div class="mobile-scrim" data-close-nav></div>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-menu-toggle><span></span><span></span><span></span></button>
+        <div class="breadcrumb">Workspace <span>/</span> Performance</div>
+        <div class="topbar-actions"><span class="today-label" data-current-date></span><a class="avatar" href="settings.html" aria-label="Account settings">A</a></div>
+      </header>
+      <div class="page-content" data-performance-page>
+        <section class="page-title-row">
+          <div><p class="eyebrow">PROGRESS FROM COMPLETED QUIZZES</p><h1>Your performance</h1><p class="intro-copy">Scores are calculated from saved quiz attempts. A single score is not a long-term trend.</p></div>
+        </section>
+        <p class="form-message" data-performance-status role="status" aria-live="polite">Loading your performance...</p>
+        <section class="content-grid three" aria-label="Quiz performance summary">
+          <article class="panel"><p class="eyebrow">COMPLETED QUIZZES</p><div class="stat-number" data-performance-attempts>—</div><p class="muted">Incomplete quizzes are excluded.</p></article>
+          <article class="panel"><p class="eyebrow">AVERAGE SCORE</p><div class="stat-number" data-performance-average>—</div><p class="muted">Mean percentage across completed quizzes.</p></article>
+          <article class="panel"><p class="eyebrow">LATEST · BEST</p><div class="stat-number performance-dual"><span data-performance-latest>—</span><span aria-hidden="true">·</span><span data-performance-best>—</span></div><p class="muted">Percentages of marks available.</p></article>
+        </section>
+        <section class="content-grid section-block">
+          <article class="panel">
+            <div class="section-heading"><div><p class="eyebrow">SCORE HISTORY</p><h2>Completed quiz attempts</h2></div></div>
+            <p class="form-note" data-performance-comparison hidden></p>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead><tr><th scope="col">Completed</th><th scope="col">Topic</th><th scope="col">Score</th><th scope="col">Percentage</th></tr></thead>
+                <tbody data-performance-history><tr><td colspan="4" class="muted">Loading score history...</td></tr></tbody>
+              </table>
+            </div>
+          </article>
+          <article class="panel">
+            <div class="section-heading"><div><p class="eyebrow">TOPIC PERFORMANCE</p><h2>Scores by study topic</h2></div></div>
+            <p class="form-note">Topics with lower average scores appear first as possible review areas. Scores summarize completed attempts only and are not a judgement of ability.</p>
+            <div class="list-rows" data-performance-topics aria-live="polite"><p class="muted">Loading topic summaries...</p></div>
+          </article>
+        </section>
+        <section class="content-grid section-block">
+          <article class="panel">
+            <div class="section-heading"><div><p class="eyebrow">MEASURED LEARNING TIME</p><h2>This week's active study time</h2></div></div>
+            <p class="muted" data-performance-study-time>Loading measured study time...</p>
+            <p class="form-note">Active AI Buddy, Socratic Tutor, and Quiz use is measured with server-timed heartbeats. Completed planner minutes are student-reported. Planned sessions are excluded, and overlapping intervals count once. Quiz attempts do not have a separate persisted duration; active Quiz page intervals are used instead.</p>
+          </article>
+          <article class="panel">
+            <div class="section-heading"><div><p class="eyebrow">PLANNED SESSIONS</p><h2>Upcoming in your planner</h2></div><a class="text-link" href="planner.html">Open planner <span aria-hidden="true">→</span></a></div>
+            <p class="muted">Planned durations are not counted as completed study time.</p>
+            <div class="list-rows" data-performance-sessions aria-live="polite"><p class="muted">Loading your plan...</p></div>
+          </article>
+        </section>
+        <footer class="page-footer"><span>SMART AI BUDDY</span><span>Review your results in context and keep practicing.</span></footer>
+      </div>
+    </main>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </div>
+</body>
+</html>

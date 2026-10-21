@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d34">
+  <title>Upload notes | Smart AI Buddy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="site-nav" aria-label="Main navigation">
+      <a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">S</span><span>smart<span class="brand-light">buddy</span></span></a>
+      <p class="nav-caption">YOUR WORKSPACE</p>
+      <nav class="nav-list">
+        <a class="nav-link" href="../index.html"><span class="nav-icon">01</span>Overview</a>
+        <a class="nav-link" href="dashboard.html"><span class="nav-icon">02</span>Dashboard</a>
+        <a class="nav-link" href="planner.html"><span class="nav-icon">03</span>Study planner</a>
+        <a class="nav-link" href="chat.html"><span class="nav-icon">04</span>AI buddy</a>
+        <a class="nav-link" href="socratic.html"><span class="nav-icon">05</span>Socratic tutor</a>
+        <a class="nav-link" href="resources.html"><span class="nav-icon">06</span>Resources</a>
+        <a class="nav-link" href="quiz.html"><span class="nav-icon">07</span>Quick quiz</a>
+        <a class="nav-link" href="performance.html"><span class="nav-icon">08</span>Performance</a>
+      </nav>
+      <p class="nav-caption nav-caption-lower">ACCOUNT</p>
+      <nav class="nav-list">
+        <a class="nav-link is-active" href="upload.html" aria-current="page"><span class="nav-icon">+</span>Upload notes</a>
+        <a class="nav-link" href="settings.html"><span class="nav-icon">09</span>Settings</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span><span>Learning mode</span><span class="status-label">ON</span></div>
+    </aside>
+    <div class="mobile-scrim" data-close-nav></div>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="site-nav" data-menu-toggle><span></span><span></span><span></span></button>
+        <div class="breadcrumb">Workspace <span>/</span> Upload notes</div>
+        <div class="topbar-actions"><span class="today-label" data-current-date></span><a class="avatar" href="settings.html" aria-label="Account settings">A</a></div>
+      </header>
+      <div class="page-content" data-upload-page>
+        <section class="page-title-row">
+          <div>
+            <p class="eyebrow">BRING YOUR MATERIALS TOGETHER</p>
+            <h1>Upload notes</h1>
+            <p class="intro-copy">Add a searchable study PDF. We save its extracted text for Quiz practice; the original PDF is not retained.</p>
+          </div>
+          <a class="button button-outline" href="resources.html">View resources <span aria-hidden="true">→</span></a>
+        </section>
+        <section class="content-grid">
+          <article class="panel">
+            <p class="eyebrow">NEW STUDY MATERIAL</p>
+            <h2>Choose a study PDF</h2>
+            <form class="form-stack" data-upload-form>
+              <div class="form-field">
+                <label for="upload-file">Study PDF</label>
+                <input id="upload-file" name="file" type="file" accept="application/pdf,.pdf" data-file-input required>
+                <span class="form-note" data-file-name>No file selected</span>
+              </div>
+              <div class="form-field">
+                <label for="upload-topic">Subject or topic</label>
+                <input id="upload-topic" name="topic" type="text" maxlength="200" placeholder="e.g. Cell biology" required>
+                <span class="form-note">Enter a topic of up to 200 characters.</span>
+              </div>
+              <p class="form-note" data-upload-limits>PDFs up to 20 MB, 300 pages, and 12,000 extracted characters. Scanned/image-only PDFs are not supported.</p>
+              <button class="button button-dark" type="submit">Upload notes <span aria-hidden="true">→</span></button>
+              <p class="form-message" data-upload-message role="status" aria-live="polite"></p>
+            </form>
+          </article>
+          <article class="panel">
+            <p class="eyebrow">WHAT HAPPENS TO YOUR FILE</p>
+            <h2>PDF text becomes study material</h2>
+            <p class="muted">Readable PDF text is extracted and saved with your account. Quiz uses that saved text to create practice questions. The original PDF is discarded after processing, so it cannot be downloaded later.</p>
+            <p class="muted">Only PDF files with selectable text are supported. Word, PowerPoint, plain-text files, and scanned/image-only PDFs are not accepted.</p>
+          </article>
+        </section>
+        <section class="panel section-block">
+          <div class="section-heading">
+            <div><p class="eyebrow">YOUR SAVED MATERIALS</p><h2>Uploaded notes</h2></div>
+          </div>
+          <div class="list-rows" data-uploaded-notes aria-live="polite"><p class="muted">Loading your saved notes...</p></div>
+          <p class="form-message" data-upload-list-message role="status" aria-live="polite"></p>
+        </section>
+        <footer class="page-footer"><span>SMART AI BUDDY</span><span>Your notes stay yours.</span></footer>
+      </div>
+    </main>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+  </div>
+</body>
+</html>
