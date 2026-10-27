@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173d34">
+  <title>Verify your email | Smart AI Buddy</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/app.js" defer></script>
+</head>
+<body class="auth-page">
+  <main class="auth-layout">
+    <section class="auth-aside"><a class="brand" href="../index.html"><span class="brand-mark" aria-hidden="true">S</span><span>smart<span class="brand-light">buddy</span></span></a><p class="eyebrow">ONE QUICK CHECK</p><h1>Confirm your email to <em>begin.</em></h1><p>Enter the 8-digit code we sent to your college email. Codes expire after 10 minutes.</p><div class="auth-note">“A little confirmation helps keep your study space yours.”</div></section>
+    <section class="auth-card" aria-labelledby="verify-title"><h2 id="verify-title">Verify your email</h2><p>Check your inbox and spam folder for your verification code.</p><p class="form-message" data-verification-status role="status" aria-live="polite"></p><form class="form-stack" data-verification-form><div class="form-field"><label for="verification-email">College email</label><input id="verification-email" name="email" type="email" autocomplete="email" maxlength="254" required></div><div class="form-field"><label for="verification-code">8-digit verification code</label><input id="verification-code" name="code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{8}" minlength="8" maxlength="8" placeholder="12345678" required></div><button class="button button-dark" type="submit"><span data-verify-label>Verify email</span><span aria-hidden="true">→</span></button><p class="form-message" data-form-message role="status" aria-live="polite"></p><button class="button button-light" type="button" data-resend-verification>Resend code</button></form><p class="auth-switch">Already verified? <a href="login.html">Sign in</a></p><p class="auth-switch"><a href="register.html">← Back to registration</a></p></section>
+  </main>
+  <div class="toast" role="status" aria-live="polite" data-toast></div>
+</body>
+</html>

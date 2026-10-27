@@ -1,0 +1,44 @@
+%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#edf4f8","primaryTextColor":"#17324d","primaryBorderColor":"#6f8ba2","lineColor":"#526b80","secondaryColor":"#e7f0eb","tertiaryColor":"#ffffff","fontFamily":"Arial"}}}%%
+flowchart LR
+    subgraph Client["Client"]
+        Browser["Student browser"]
+        UI["HTML CSS JavaScript interface"]
+    end
+    subgraph SpringBoot["Spring Boot application"]
+        Static["Bundled static page host"]
+        Security["Spring Security session and CSRF"]
+        Controllers["REST controllers"]
+        Services["Application services"]
+        PDFBox["Apache PDFBox library"]
+    end
+    subgraph DataAccess["Persistence"]
+        Repositories["Spring Data JPA repositories"]
+        Hibernate["JPA and Hibernate"]
+        MySQL[("MySQL smart_ai_buddy")]
+    end
+    subgraph Providers["External services"]
+        Gemini["Gemini API"]
+        SMTP["SMTP email service"]
+    end
+
+    Browser -->|"uses"| UI
+    UI -->|"requests static pages"| Static
+    Static -->|"serves HTML CSS JavaScript"| UI
+    UI -->|"HTTP API session cookie and CSRF"| Security
+    Security -->|"authorized requests"| Controllers
+    Controllers -->|"dispatches"| Services
+    Services -->|"repository calls"| Repositories
+    Repositories -->|"entity operations"| Hibernate
+    Hibernate -->|"SQL"| MySQL
+    Services -->|"chat tutor and quiz generation"| Gemini
+    Services -->|"verification and reset email"| SMTP
+    Services -->|"extracts uploaded PDF text"| PDFBox
+
+    classDef client fill:#eaf4f1,stroke:#557f72,color:#163a32,stroke-width:1.5px
+    classDef app fill:#edf4f8,stroke:#6f8ba2,color:#17324d,stroke-width:1.5px
+    classDef data fill:#fff4e5,stroke:#bd9152,color:#4d3820,stroke-width:1.5px
+    classDef external fill:#f3eef9,stroke:#8e78a8,color:#392d4a,stroke-width:1.5px
+    class Browser,UI client
+    class Static,Security,Controllers,Services,PDFBox app
+    class Repositories,Hibernate,MySQL data
+    class Gemini,SMTP external

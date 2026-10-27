@@ -1,0 +1,33 @@
+%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#edf4f8","primaryTextColor":"#17324d","primaryBorderColor":"#6f8ba2","lineColor":"#526b80","secondaryColor":"#e7f0eb","tertiaryColor":"#ffffff","fontFamily":"Arial"}}}%%
+sequenceDiagram
+    actor Student
+    participant Browser as Browser interface
+    participant Controller as ChatController
+    participant History as ChatHistoryService
+    participant DB as MySQL via JPA
+    participant Chat as ChatService
+    participant Gemini as Gemini API
+
+    Student->>Browser: Enter message and submit
+    Browser->>Controller: POST chat request with session and CSRF
+    Controller->>History: Submit student, conversation, request ID, message
+    History->>DB: Find or create owned conversation
+    History->>DB: Load recent completed turns
+    History->>DB: Save pending student message
+    History->>Chat: Generate answer with recent chat history
+    Chat->>Gemini: POST generateContent request
+    alt Gemini returns answer
+        Gemini-->>Chat: Generated answer
+        Chat-->>History: Answer text
+        History->>DB: Save assistant message and complete student message
+        History-->>Controller: Answer and conversation identifiers
+        Controller-->>Browser: HTTP success with answer
+        Browser-->>Student: Display assistant response
+    else Gemini call fails
+        Gemini-->>Chat: Provider error or connection failure
+        Chat-->>History: Service error
+        History->>DB: Mark student message failed
+        History-->>Controller: Error result and status
+        Controller-->>Browser: HTTP error with failure message
+        Browser-->>Student: Display failure message
+    end

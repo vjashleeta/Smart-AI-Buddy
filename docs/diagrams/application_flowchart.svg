@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2300" height="1550" viewBox="0 0 2300 1550" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 4.5 - Smart AI Buddy Application Flowchart</title>
+  <desc id="desc">Public entry, registration and recovery paths, session authentication, dashboard feature processing, conditional persistence and integrations, and logout.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#526b80"/></marker>
+    <style>
+      text{font-family:Arial,sans-serif;fill:#17324d}.title{font-size:34px;font-weight:700}.subtitle{font-size:18px;fill:#526b80}.process{fill:#edf4f8;stroke:#6f8ba2;stroke-width:2}.user{fill:#eaf4f1;stroke:#557f72;stroke-width:2}.decision{fill:#fff4e5;stroke:#bd9152;stroke-width:2}.external{fill:#f3eef9;stroke:#8e78a8;stroke-width:2}.data{fill:#fff4e5;stroke:#bd9152;stroke-width:2}.terminal{fill:#173d34;stroke:#173d34;stroke-width:2}.label{font-size:18px;font-weight:700;text-anchor:middle}.small{font-size:16px;fill:#526b80;text-anchor:middle}.white{font-size:18px;font-weight:700;text-anchor:middle;fill:#fff}.line{fill:none;stroke:#526b80;stroke-width:2.5;marker-end:url(#arrow)}.caption{font-size:15px;fill:#536c80}
+    </style>
+  </defs>
+  <rect width="2300" height="1550" fill="#fff"/>
+  <text class="title" x="55" y="62">Figure 4.5  Application Flowchart</text>
+  <text class="subtitle" x="55" y="95">Public entry and account flows lead to session-protected student features and conditional data or service calls</text>
+
+  <ellipse class="terminal" cx="90" cy="265" rx="48" ry="38"/>
+  <text class="white" x="90" y="271">Start</text>
+  <rect class="user" x="175" y="220" width="190" height="90" rx="12"/>
+  <text class="label" x="270" y="257"><tspan x="270">Open application</tspan><tspan class="small" x="270" dy="24">public entry</tspan></text>
+  <polygon class="decision" points="525,205 630,265 525,325 420,265"/>
+  <text class="label" x="525" y="258"><tspan x="525">Sign in, register</tspan><tspan x="525" dy="22">or recover?</tspan></text>
+  <path class="line" d="M138 265H175"/>
+  <path class="line" d="M365 265H420"/>
+
+  <rect class="user" x="680" y="105" width="190" height="80" rx="12"/>
+  <text class="label" x="775" y="153">Login page</text>
+  <rect class="user" x="680" y="245" width="190" height="80" rx="12"/>
+  <text class="label" x="775" y="293">Register account</text>
+  <rect class="user" x="680" y="385" width="190" height="80" rx="12"/>
+  <text class="label" x="775" y="433">Request password reset</text>
+  <path class="line" d="M580 230L680 145"/>
+  <text class="caption" x="620" y="174">sign in</text>
+  <path class="line" d="M630 265H680"/>
+  <text class="caption" x="655" y="252">register</text>
+  <path class="line" d="M580 300L680 425"/>
+  <text class="caption" x="630" y="381">recover</text>
+
+  <rect class="process" x="970" y="105" width="210" height="80" rx="12"/>
+  <text class="label" x="1075" y="139"><tspan x="1075">POST login</tspan><tspan class="small" x="1075" dy="23">Spring Security</tspan></text>
+  <rect class="process" x="970" y="245" width="210" height="80" rx="12"/>
+  <text class="label" x="1075" y="277"><tspan x="1075">Save account</tspan><tspan class="small" x="1075" dy="23">send verification code</tspan></text>
+  <rect class="user" x="1250" y="245" width="220" height="80" rx="12"/>
+  <text class="label" x="1360" y="277"><tspan x="1360">Verify email</tspan><tspan class="small" x="1360" dy="23">emailed code</tspan></text>
+  <rect class="process" x="970" y="385" width="210" height="80" rx="12"/>
+  <text class="label" x="1075" y="417"><tspan x="1075">Send reset link</tspan><tspan class="small" x="1075" dy="23">by email</tspan></text>
+  <rect class="user" x="1250" y="385" width="220" height="80" rx="12"/>
+  <text class="label" x="1360" y="417"><tspan x="1360">Reset password</tspan><tspan class="small" x="1360" dy="23">using emailed link</tspan></text>
+  <path class="line" d="M870 145H970"/>
+  <path class="line" d="M870 285H970"/>
+  <path class="line" d="M1180 285H1250"/>
+  <path class="line" d="M1250 270H910V145H870"/>
+  <text class="caption" x="1070" y="258">verified</text>
+  <path class="line" d="M870 425H970"/>
+  <path class="line" d="M1180 425H1250"/>
+  <path class="line" d="M1250 410H925V145H870"/>
+  <polygon class="decision" points="1325,100 1435,145 1325,190 1215,145"/>
+  <text class="label" x="1325" y="139"><tspan x="1325">Valid credentials</tspan><tspan x="1325" dy="22">and verified email?</tspan></text>
+  <path class="line" d="M1180 145H1215"/>
+  <rect class="process" x="1500" y="190" width="190" height="80" rx="12"/>
+  <text class="label" x="1595" y="238">Create session</text>
+  <path class="line" d="M1380 175L1500 220"/>
+  <text class="caption" x="1434" y="191">yes</text>
+  <rect class="user" x="1740" y="190" width="190" height="80" rx="12"/>
+  <text class="label" x="1835" y="238">Dashboard</text>
+  <path class="line" d="M1690 230H1740"/>
+  <text class="caption" x="1715" y="218">redirect</text>
+  <path class="line" d="M1325 190V285H750V185"/>
+  <text class="caption" x="1395" y="280">no: show error and remain on login</text>
+
+  <rect class="user" x="80" y="590" width="590" height="625" rx="18"/>
+  <text class="label" x="375" y="632">Choose a student feature</text>
+  <path d="M110 650H640" stroke="#b7c6d0" stroke-width="1.5"/>
+  <text class="small" x="145" y="700" text-anchor="start">AI Buddy chat</text>
+  <text class="small" x="145" y="755" text-anchor="start">Socratic Tutor</text>
+  <text class="small" x="145" y="810" text-anchor="start">Study planner</text>
+  <text class="small" x="145" y="865" text-anchor="start">Quizzes and study materials</text>
+  <text class="small" x="145" y="920" text-anchor="start">Resources and PDF uploads</text>
+  <text class="small" x="145" y="975" text-anchor="start">Dashboard and performance</text>
+  <text class="small" x="145" y="1030" text-anchor="start">Profile and password settings</text>
+  <text class="caption" x="145" y="1110">Student pages and feature APIs require authentication.</text>
+  <path class="line" d="M1835 270V500H375V590"/>
+
+  <rect class="process" x="770" y="800" width="230" height="105" rx="12"/>
+  <text class="label" x="885" y="843"><tspan x="885">Feature controller</tspan><tspan x="885" dy="23">and service</tspan></text>
+  <path class="line" d="M670 850H770"/>
+  <polygon class="decision" points="1110,755 1220,850 1110,945 1000,850"/>
+  <text class="label" x="1110" y="843"><tspan x="1110">Uses stored</tspan><tspan x="1110" dy="22">data?</tspan></text>
+  <path class="line" d="M1220 850H1270V675H1285"/>
+  <text class="caption" x="1260" y="836">yes when needed</text>
+  <ellipse class="data" cx="1410" cy="675" rx="125" ry="55"/>
+  <text class="label" x="1410" y="681">MySQL via JPA</text>
+  <path class="line" d="M1410 730V825"/>
+  <text class="caption" x="1460" y="780">continue processing</text>
+  <path class="line" d="M1110 945V1000H1250V920H1300"/>
+  <text class="caption" x="1190" y="1003">no stored data</text>
+  <polygon class="decision" points="1410,825 1520,920 1410,1015 1300,920"/>
+  <text class="label" x="1410" y="912"><tspan x="1410">External or PDF</tspan><tspan x="1410" dy="22">service needed?</tspan></text>
+  <rect class="external" x="1610" y="785" width="250" height="95" rx="12"/>
+  <text class="label" x="1735" y="824"><tspan x="1735">Gemini, SMTP</tspan><tspan class="small" x="1735" dy="23">or PDFBox</tspan></text>
+  <path class="line" d="M1520 920H1610V833"/>
+  <text class="caption" x="1564" y="906">yes as needed</text>
+  <path class="line" d="M1410 1015V1100H1610"/>
+  <text class="caption" x="1480" y="1088">no</text>
+  <rect class="user" x="1610" y="1055" width="250" height="95" rx="12"/>
+  <text class="label" x="1735" y="1093"><tspan x="1735">Return result</tspan><tspan class="small" x="1735" dy="23">display in browser</tspan></text>
+  <path class="line" d="M1735 880V1055"/>
+
+  <polygon class="decision" points="1970,1035 2070,1100 1970,1165 1870,1100"/>
+  <text class="label" x="1970" y="1093"><tspan x="1970">Continue</tspan><tspan x="1970" dy="22">using app?</tspan></text>
+  <path class="line" d="M1860 1100H1870"/>
+  <path class="line" d="M1970 1035V535H375V590"/>
+  <text class="caption" x="1850" y="523">yes</text>
+  <rect class="process" x="1900" y="1250" width="190" height="75" rx="12"/>
+  <text class="label" x="1995" y="1280"><tspan x="1995">POST logout</tspan><tspan class="small" x="1995" dy="22">invalidate session</tspan></text>
+  <path class="line" d="M1970 1165V1250"/>
+  <text class="caption" x="2010" y="1210">no</text>
+  <rect class="user" x="2110" y="1245" width="170" height="80" rx="12"/>
+  <text class="label" x="2195" y="1278"><tspan x="2195">Return to</tspan><tspan x="2195" dy="22">login page</tspan></text>
+  <path class="line" d="M2090 1287H2110"/>
+  <ellipse class="terminal" cx="2195" cy="1400" rx="65" ry="38"/>
+  <text class="white" x="2195" y="1406">Exit session</text>
+  <path class="line" d="M2195 1325V1362"/>
+</svg>

@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1370" viewBox="0 0 1900 1370" role="img" aria-labelledby="title desc">
+  <title id="title">Smart AI Buddy UML Class Diagram - High-Level View</title>
+  <desc id="desc">High-level UML package view of actual backend controller, service, repository, entity, DTO, and configuration classes. Module-level Mermaid class diagrams contain the detailed relationships and entity multiplicities.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#526b80"/></marker>
+    <style>
+      text{font-family:Arial,sans-serif;fill:#17324d}.title{font-size:34px;font-weight:700}.subtitle{font-size:18px;fill:#526b80}.package{fill:#f8fbfd;stroke:#6f8ba2;stroke-width:2}.package-title{font-size:23px;font-weight:700}.package-path{font-size:15px;fill:#526b80}.item{font-size:16px}.item-small{font-size:14px}.line{fill:none;stroke:#526b80;stroke-width:3;marker-end:url(#arrow)}.layer{font-size:14px;fill:#526b80;font-weight:700}.footer{font-size:15px;fill:#526b80}
+    </style>
+  </defs>
+  <rect width="1900" height="1370" fill="#fff"/>
+  <text class="title" x="60" y="62">Smart AI Buddy - UML Class Diagram</text>
+  <text class="subtitle" x="60" y="96">High-level backend package view; detailed module diagrams are supplied as editable Mermaid sources.</text>
+
+  <text class="layer" x="65" y="135">PRESENTATION</text>
+  <text class="layer" x="510" y="135">BUSINESS LOGIC</text>
+  <text class="layer" x="990" y="135">DATA ACCESS</text>
+  <text class="layer" x="1390" y="135">DOMAIN MODEL</text>
+
+  <rect class="package" x="55" y="155" width="390" height="805" rx="12"/>
+  <rect class="package" x="490" y="155" width="430" height="805" rx="12"/>
+  <rect class="package" x="965" y="155" width="375" height="805" rx="12"/>
+  <rect class="package" x="1385" y="155" width="460" height="805" rx="12"/>
+
+  <text class="package-title" x="78" y="195">controller</text>
+  <text class="package-path" x="78" y="220">com.smartai.buddy.controller</text>
+  <text class="item" x="78" y="262">AuthenticationController</text>
+  <text class="item" x="78" y="294">RegistrationController</text>
+  <text class="item" x="78" y="326">ChatController</text>
+  <text class="item" x="78" y="358">SocraticController</text>
+  <text class="item" x="78" y="390">QuizController</text>
+  <text class="item" x="78" y="422">PlannerController</text>
+  <text class="item" x="78" y="454">LearningActivityController</text>
+  <text class="item" x="78" y="486">ResourceRecommendationController</text>
+  <text class="item" x="78" y="518">StudentSettingsController</text>
+  <text class="item" x="78" y="550">StudentAnalyticsController</text>
+  <text class="item" x="78" y="582">HealthController</text>
+  <text class="item-small" x="78" y="640">Accepts request DTOs and returns response DTOs.</text>
+
+  <text class="package-title" x="513" y="195">service</text>
+  <text class="package-path" x="513" y="220">com.smartai.buddy.service</text>
+  <text class="item" x="513" y="262">RegistrationService</text>
+  <text class="item" x="513" y="294">EmailVerificationService</text>
+  <text class="item" x="513" y="326">PasswordResetService</text>
+  <text class="item" x="513" y="358">PasswordResetRateLimiter</text>
+  <text class="item" x="513" y="390">VerificationEmailSender (interface)</text>
+  <text class="item" x="513" y="422">SmtpVerificationEmailSender</text>
+  <text class="item" x="513" y="454">ChatHistoryService</text>
+  <text class="item" x="513" y="486">ChatService</text>
+  <text class="item" x="513" y="518">QuizService</text>
+  <text class="item" x="513" y="550">GeminiQuizQuestionGenerator</text>
+  <text class="item" x="513" y="582">StudyTextQuestionGenerator</text>
+  <text class="item" x="513" y="614">PdfStudyMaterialExtractor</text>
+  <text class="item" x="513" y="646">ResourceRecommendationService</text>
+  <text class="item" x="513" y="678">PlannerService</text>
+  <text class="item" x="513" y="710">LearningActivityService</text>
+  <text class="item" x="513" y="742">StudentSettingsService</text>
+  <text class="item" x="513" y="774">StudentAnalyticsService</text>
+
+  <text class="package-title" x="988" y="195">repository</text>
+  <text class="package-path" x="988" y="220">com.smartai.buddy.repository</text>
+  <text class="item" x="988" y="262">UserRepository</text>
+  <text class="item" x="988" y="294">EmailVerificationCodeRepository</text>
+  <text class="item" x="988" y="326">PasswordResetTokenRepository</text>
+  <text class="item" x="988" y="358">ChatConversationRepository</text>
+  <text class="item" x="988" y="390">ChatMessageRepository</text>
+  <text class="item" x="988" y="422">LearningActivityRepository</text>
+  <text class="item" x="988" y="454">StudyPlanRepository</text>
+  <text class="item" x="988" y="486">StudySessionRepository</text>
+  <text class="item" x="988" y="518">StudyMaterialRepository</text>
+  <text class="item" x="988" y="550">QuizConceptRepository</text>
+  <text class="item" x="988" y="582">QuizAttemptRepository</text>
+  <text class="item" x="988" y="614">QuizAttemptQuestionRepository</text>
+  <text class="item" x="988" y="646">QuizAnswerRepository</text>
+  <text class="item-small" x="988" y="704">Spring Data JPA interfaces.</text>
+
+  <text class="package-title" x="1408" y="195">entity</text>
+  <text class="package-path" x="1408" y="220">com.smartai.buddy.entity</text>
+  <text class="item" x="1408" y="262">User</text>
+  <text class="item" x="1408" y="294">EmailVerificationCode</text>
+  <text class="item" x="1408" y="326">PasswordResetToken</text>
+  <text class="item" x="1408" y="358">ChatConversation</text>
+  <text class="item" x="1408" y="390">ChatMessage</text>
+  <text class="item" x="1408" y="422">LearningActivity</text>
+  <text class="item" x="1408" y="454">StudyPlan</text>
+  <text class="item" x="1408" y="486">StudySession</text>
+  <text class="item" x="1408" y="518">StudyMaterial</text>
+  <text class="item" x="1408" y="550">QuizConcept</text>
+  <text class="item" x="1408" y="582">QuizAttempt</text>
+  <text class="item" x="1408" y="614">QuizAttemptQuestion</text>
+  <text class="item" x="1408" y="646">QuizAnswer</text>
+  <text class="item-small" x="1408" y="690">Enums: VerificationPurpose, ChatMessageRole,</text>
+  <text class="item-small" x="1408" y="714">ChatMessageStatus, LearningActivityType</text>
+
+  <path class="line" d="M445 535L480 535"/>
+  <path class="line" d="M920 535L955 535"/>
+  <path class="line" d="M1340 535L1375 535"/>
+  <text class="item-small" x="449" y="515">depends on</text>
+  <text class="item-small" x="922" y="515">uses</text>
+  <text class="item-small" x="1342" y="515">maps to</text>
+
+  <rect class="package" x="55" y="995" width="1790" height="290" rx="12"/>
+  <text class="package-title" x="78" y="1037">Supporting project types</text>
+  <text class="package-path" x="78" y="1064">Configuration classes and representative request / response DTOs</text>
+  <text class="item" x="78" y="1106">config: SecurityConfiguration, PasswordEncoderConfiguration, ChatConfiguration, TimeConfiguration</text>
+  <text class="item" x="78" y="1140">Auth DTOs: RegistrationRequest, RegistrationResponse, LoginRequest, EmailVerificationRequest, ResetPasswordRequest</text>
+  <text class="item" x="78" y="1174">Chat DTOs: ChatMessageRequest, ChatMessageResponse, ChatConversationResponse, ChatTurn, SocraticRequest</text>
+  <text class="item" x="78" y="1208">Study DTOs: AddQuizMaterialRequest, QuizAnswerRequest, CreateStudySessionRequest, PlannerResponse, DashboardResponse</text>
+  <text class="footer" x="78" y="1252">Dashed module details and entity multiplicities are in class_diagram_auth.mmd, class_diagram_chat.mmd,</text>
+  <text class="footer" x="78" y="1276">class_diagram_learning.mmd, and class_diagram_student_services.mmd.</text>
+</svg>

@@ -2,7 +2,10 @@ package com.smartai.buddy.controller;
 
 import com.smartai.buddy.dto.ApiError;
 import com.smartai.buddy.dto.CsrfTokenResponse;
+import com.smartai.buddy.dto.ForgotPasswordRequest;
 import com.smartai.buddy.dto.LoginRequest;
+import com.smartai.buddy.dto.ResetPasswordRequest;
+import com.smartai.buddy.service.PasswordResetService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -33,6 +36,7 @@ public class AuthenticationController {
 	private static final String INVALID_CREDENTIALS = "Invalid email or password.";
 
 	private final AuthenticationManager authenticationManager;
+	private final PasswordResetService passwordResetService;
 	private final SecurityContextRepository securityContextRepository;
 	private final SessionAuthenticationStrategy sessionAuthenticationStrategy;
 	private final CsrfTokenRepository csrfTokenRepository;
@@ -41,11 +45,13 @@ public class AuthenticationController {
 
 	public AuthenticationController(
 		AuthenticationManager authenticationManager,
+		PasswordResetService passwordResetService,
 		SecurityContextRepository securityContextRepository,
 		SessionAuthenticationStrategy sessionAuthenticationStrategy,
 		CsrfTokenRepository csrfTokenRepository
 	) {
 		this.authenticationManager = authenticationManager;
+		this.passwordResetService = passwordResetService;
 		this.securityContextRepository = securityContextRepository;
 		this.sessionAuthenticationStrategy = sessionAuthenticationStrategy;
 		this.csrfTokenRepository = csrfTokenRepository;
@@ -54,6 +60,24 @@ public class AuthenticationController {
 	@GetMapping("/api/auth/csrf")
 	public CsrfTokenResponse csrfToken(@RequestAttribute("_csrf") CsrfToken csrfToken) {
 		return new CsrfTokenResponse(csrfToken.getToken(), csrfToken.getHeaderName());
+	}
+
+	@PostMapping("/api/auth/forgot-password")
+	public ResponseEntity<Map<String, String>> forgotPassword(
+		@Valid @RequestBody ForgotPasswordRequest request,
+		HttpServletRequest servletRequest
+	) {
+		passwordResetService.requestReset(request.email(), servletRequest.getRemoteAddr());
+		return ResponseEntity.accepted().body(Map.of("message", PasswordResetService.GENERIC_RESPONSE));
+	}
+
+	@PostMapping("/api/auth/reset-password")
+	public ResponseEntity<Void> resetPassword(
+		@Valid @RequestBody ResetPasswordRequest request,
+		HttpServletRequest servletRequest
+	) {
+		passwordResetService.resetPassword(request, servletRequest.getRemoteAddr());
+		return ResponseEntity.noContent().build();
 	}
 
 	@PostMapping("/api/auth/login")

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1750" height="1320" viewBox="0 0 1750 1320" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 4.3 - Smart AI Buddy Student Use Cases</title>
+  <desc id="desc">Student actor connected to twelve implemented account, learning, resource and profile use cases.</desc>
+  <defs>
+    <style>
+      text{font-family:Arial,sans-serif;fill:#17324d}.title{font-size:34px;font-weight:700}.subtitle{font-size:18px;fill:#526b80}.boundary{fill:#fbfdfe;stroke:#7d95a8;stroke-width:2}.ellipse{fill:#edf4f8;stroke:#6f8ba2;stroke-width:2}.ell-label{font-size:17px;font-weight:600;text-anchor:middle}.boundary-title{font-size:20px;font-weight:700;fill:#536c80}.association{fill:none;stroke:#647d91;stroke-width:2}.actor{stroke:#17324d;stroke-width:4;fill:none;stroke-linecap:round}.caption{font-size:15px;fill:#526b80}
+    </style>
+  </defs>
+  <rect width="1750" height="1320" fill="#fff"/>
+  <text class="title" x="60" y="65">Figure 4.3  Student Use-Case Diagram</text>
+  <text class="subtitle" x="60" y="98">Implemented interactions available to the student role</text>
+  <rect class="boundary" x="360" y="145" width="1330" height="1100" rx="18"/>
+  <text class="boundary-title" x="390" y="182">SMART AI BUDDY</text>
+
+  <path class="actor" d="M165 610a31 31 0 1 0 0.1 0M165 642V755M105 680H225M165 755L110 835M165 755L220 835"/>
+  <text x="165" y="875" text-anchor="middle" font-size="19" font-weight="700">Student</text>
+
+  <path class="association" d="M225 680H475M475 270V1090M475 205H1120M1120 270V1090"/>
+  <path class="association" d="M475 270H535M475 434H535M475 598H535M475 762H535M475 926H535M475 1090H535"/>
+  <path class="association" d="M1120 270H1175M1120 434H1175M1120 598H1175M1120 762H1175M1120 926H1175M1120 1090H1175"/>
+
+  <ellipse class="ellipse" cx="700" cy="270" rx="165" ry="54"/>
+  <text class="ell-label" x="700" y="276">Register account</text>
+  <ellipse class="ellipse" cx="700" cy="434" rx="165" ry="54"/>
+  <text class="ell-label" x="700" y="440">Sign in and sign out</text>
+  <ellipse class="ellipse" cx="700" cy="598" rx="165" ry="54"/>
+  <text class="ell-label" x="700" y="604">Verify email address</text>
+  <ellipse class="ellipse" cx="700" cy="762" rx="165" ry="54"/>
+  <text class="ell-label" x="700" y="768">Recover password</text>
+  <ellipse class="ellipse" cx="700" cy="926" rx="165" ry="54"/>
+  <text class="ell-label" x="700" y="932">Chat with AI Buddy</text>
+  <ellipse class="ellipse" cx="700" cy="1090" rx="165" ry="54"/>
+  <text class="ell-label" x="700" y="1096">Use Socratic Tutor</text>
+
+  <ellipse class="ellipse" cx="1340" cy="270" rx="165" ry="54"/>
+  <text class="ell-label" x="1340" y="276">Manage study plan</text>
+  <ellipse class="ellipse" cx="1340" cy="434" rx="165" ry="54"/>
+  <text class="ell-label" x="1340" y="440">Take quizzes</text>
+  <ellipse class="ellipse" cx="1340" cy="598" rx="165" ry="54"/>
+  <text class="ell-label" x="1340" y="604">Browse resources</text>
+  <ellipse class="ellipse" cx="1340" cy="762" rx="165" ry="54"/>
+  <text class="ell-label" x="1340" y="768">Upload notes or PDF</text>
+  <ellipse class="ellipse" cx="1340" cy="926" rx="165" ry="54"/>
+  <text class="ell-label" x="1340" y="920"><tspan x="1340">View dashboard and</tspan><tspan x="1340" dy="22">performance</tspan></text>
+  <ellipse class="ellipse" cx="1340" cy="1090" rx="165" ry="54"/>
+  <text class="ell-label" x="1340" y="1084"><tspan x="1340">Manage profile and</tspan><tspan x="1340" dy="22">password settings</tspan></text>
+  <text class="caption" x="390" y="1210">The account and learning use cases map to authenticated pages and REST endpoints in the implementation.</text>
+</svg>

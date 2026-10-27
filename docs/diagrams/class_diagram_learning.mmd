@@ -1,0 +1,63 @@
+classDiagram
+direction LR
+
+class QuizController
+class ResourceRecommendationController
+class QuizService
+class ResourceRecommendationService
+class GeminiQuizQuestionGenerator
+class StudyTextQuestionGenerator
+class PdfStudyMaterialExtractor
+class QuizAttemptRepository
+class QuizAttemptQuestionRepository
+class QuizAnswerRepository
+class QuizConceptRepository
+class StudyMaterialRepository
+class UserRepository
+class User
+class StudyMaterial
+class QuizConcept
+class QuizAttempt
+class QuizAttemptQuestion
+class QuizAnswer
+class AddQuizMaterialRequest
+class QuizAnswerRequest
+class QuizAttemptResponse
+class QuizMaterialResponse
+class TopicRecommendationResponse
+class PdfTopicRecommendationResponse
+interface JpaRepository
+
+QuizController ..> QuizService : manages quiz
+QuizController ..> AddQuizMaterialRequest : accepts
+QuizController ..> QuizAnswerRequest : accepts
+QuizController ..> QuizAttemptResponse : returns
+QuizController ..> QuizMaterialResponse : returns
+QuizService ..> UserRepository : loads student
+QuizService ..> StudyMaterialRepository : manages materials
+QuizService ..> QuizConceptRepository : manages concepts
+QuizService ..> QuizAttemptRepository : manages attempts
+QuizService ..> QuizAttemptQuestionRepository : manages questions
+QuizService ..> QuizAnswerRepository : stores answers
+QuizService ..> GeminiQuizQuestionGenerator : generates questions
+QuizService ..> StudyTextQuestionGenerator : generates text questions
+QuizService ..> PdfStudyMaterialExtractor : extracts PDF text
+ResourceRecommendationController ..> ResourceRecommendationService : requests recommendations
+ResourceRecommendationController ..> TopicRecommendationResponse : returns
+ResourceRecommendationController ..> PdfTopicRecommendationResponse : returns
+ResourceRecommendationService ..> QuizService : reads learning evidence
+ResourceRecommendationService ..> PdfStudyMaterialExtractor : extracts PDF text
+
+User "1" --> "0..*" StudyMaterial : owns
+StudyMaterial "1" --> "0..*" QuizConcept : contains
+User "1" --> "0..*" QuizAttempt : takes
+QuizAttempt "1" --> "0..*" QuizAttemptQuestion : includes
+QuizConcept "1" --> "0..*" QuizAttemptQuestion : supplies
+QuizAttemptQuestion "1" --> "0..1" QuizAnswer : answer
+
+JpaRepository <|.. QuizAttemptRepository : extends
+JpaRepository <|.. QuizAttemptQuestionRepository : extends
+JpaRepository <|.. QuizAnswerRepository : extends
+JpaRepository <|.. QuizConceptRepository : extends
+JpaRepository <|.. StudyMaterialRepository : extends
+JpaRepository <|.. UserRepository : extends

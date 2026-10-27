@@ -1,0 +1,34 @@
+%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#edf4f8","primaryTextColor":"#17324d","primaryBorderColor":"#6f8ba2","lineColor":"#526b80","secondaryColor":"#e7f0eb","tertiaryColor":"#ffffff","fontFamily":"Arial"}}}%%
+flowchart LR
+    Student(("Student actor"))
+    subgraph System["Smart AI Buddy"]
+        Register(["Register account"])
+        SignIn(["Sign in and sign out"])
+        Verify(["Verify email"])
+        Recover(["Recover password"])
+        Chat(["Chat with AI Buddy"])
+        Tutor(["Use Socratic Tutor"])
+        Planner(["Manage study plan"])
+        Quiz(["Take quizzes"])
+        Resources(["Browse resources"])
+        Upload(["Upload notes or PDF"])
+        Performance(["View dashboard and performance"])
+        Settings(["Manage profile and password"])
+    end
+    Student --> Register
+    Student --> SignIn
+    Student --> Verify
+    Student --> Recover
+    Student --> Chat
+    Student --> Tutor
+    Student --> Planner
+    Student --> Quiz
+    Student --> Resources
+    Student --> Upload
+    Student --> Performance
+    Student --> Settings
+
+    classDef actor fill:#eaf4f1,stroke:#557f72,color:#163a32,stroke-width:2px
+    classDef usecase fill:#edf4f8,stroke:#6f8ba2,color:#17324d,stroke-width:1.5px
+    class Student actor
+    class Register,SignIn,Verify,Recover,Chat,Tutor,Planner,Quiz,Resources,Upload,Performance,Settings usecase

@@ -9,7 +9,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.containsString;
 
 import com.smartai.buddy.entity.User;
+import com.smartai.buddy.repository.EmailVerificationCodeRepository;
 import com.smartai.buddy.repository.UserRepository;
+import com.smartai.buddy.service.VerificationEmailSender;
 import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +38,13 @@ class RegistrationIntegrationTests {
 	private UserRepository userRepository;
 
 	@Autowired
+	private EmailVerificationCodeRepository verificationCodeRepository;
+
+	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@MockitoBean
+	private VerificationEmailSender verificationEmailSender;
 
 	private String email;
 
@@ -46,6 +55,8 @@ class RegistrationIntegrationTests {
 
 	@AfterEach
 	void cleanUp() {
+		userRepository.findByCollegeEmail(email)
+			.ifPresent(user -> verificationCodeRepository.deleteByUser_Id(user.getId()));
 		userRepository.deleteByCollegeEmail(email);
 	}
 
@@ -85,6 +96,7 @@ class RegistrationIntegrationTests {
 			.andExpect(jsonPath("$.passwordHash").doesNotExist());
 
 		User persistedUser = userRepository.findByCollegeEmail(email).orElseThrow();
+		org.junit.jupiter.api.Assertions.assertFalse(persistedUser.isEmailVerified());
 		org.junit.jupiter.api.Assertions.assertTrue(passwordEncoder.matches(
 			"securePass123", persistedUser.getPasswordHash()
 		));

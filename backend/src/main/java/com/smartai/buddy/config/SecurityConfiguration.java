@@ -35,6 +35,7 @@ public class SecurityConfiguration {
 			.map(user -> User.withUsername(user.getCollegeEmail())
 				.password(user.getPasswordHash())
 				.roles("STUDENT")
+				.disabled(!user.isEmailVerified())
 				.build())
 			.orElseThrow(() -> new UsernameNotFoundException("Invalid credentials."));
 	}
@@ -105,6 +106,10 @@ public class SecurityConfiguration {
 					"/api/health",
 					"/api/auth/register",
 					"/api/auth/login",
+					"/api/auth/forgot-password",
+					"/api/auth/reset-password",
+					"/api/auth/verify-email",
+					"/api/auth/resend-verification",
 					"/api/auth/csrf",
 					"/api/auth/logout",
 					"/",
@@ -112,7 +117,10 @@ public class SecurityConfiguration {
 					"/css/**",
 					"/js/**",
 					"/pages/login.html",
-					"/pages/register.html"
+					"/pages/register.html",
+					"/pages/verify-email.html",
+					"/pages/forgot-password.html",
+					"/pages/reset-password.html"
 				).permitAll()
 				.requestMatchers("/pages/**").authenticated()
 				.anyRequest().authenticated()

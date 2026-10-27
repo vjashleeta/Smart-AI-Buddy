@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1610" viewBox="0 0 1700 1610" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 4.4 - AI Buddy Chat Sequence</title>
+  <desc id="desc">Chat request, database reads and writes, Gemini response handling, and success or provider failure response.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#536d82"/></marker>
+    <style>
+      text{font-family:Arial,sans-serif;fill:#17324d}.title{font-size:34px;font-weight:700}.subtitle{font-size:18px;fill:#526b80}.actorbox{fill:#eaf4f1;stroke:#557f72;stroke-width:2}.part{fill:#edf4f8;stroke:#6f8ba2;stroke-width:2}.db{fill:#fff4e5;stroke:#bd9152;stroke-width:2}.ext{fill:#f3eef9;stroke:#8e78a8;stroke-width:2}.parttext{font-size:16px;font-weight:700;text-anchor:middle}.lifeline{stroke:#91a4b3;stroke-width:1.5;stroke-dasharray:7 7}.msg{stroke:#536d82;stroke-width:2;fill:none;marker-end:url(#arrow)}.return{stroke:#536d82;stroke-width:2;stroke-dasharray:7 5;fill:none;marker-end:url(#arrow)}.msgtext{font-size:15px;text-anchor:middle}.frame{fill:#fbfdfe;stroke:#9cafbd;stroke-width:2}.frametext{font-size:16px;font-weight:700}.success{fill:#edf6f1;stroke:#7e9f8d;stroke-width:1.5}.failure{fill:#fbf0ed;stroke:#b98172;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="1700" height="1610" fill="#fff"/>
+  <text class="title" x="55" y="62">Figure 4.4  AI Buddy Chat Sequence</text>
+  <text class="subtitle" x="55" y="95">Persisted conversation history, Gemini generation, and success or failure completion</text>
+
+  <rect class="actorbox" x="48" y="135" width="145" height="72" rx="10"/><text class="parttext" x="120" y="178">Student</text>
+  <rect class="part" x="245" y="135" width="190" height="72" rx="10"/><text class="parttext" x="340" y="178">Browser interface</text>
+  <rect class="part" x="470" y="135" width="190" height="72" rx="10"/><text class="parttext" x="565" y="178">ChatController</text>
+  <rect class="part" x="695" y="135" width="190" height="72" rx="10"/><text class="parttext" x="790" y="178">ChatHistoryService</text>
+  <rect class="db" x="920" y="135" width="190" height="72" rx="10"/><text class="parttext" x="1015" y="167"><tspan x="1015">MySQL via</tspan><tspan x="1015" dy="20">Spring Data JPA</tspan></text>
+  <rect class="part" x="1145" y="135" width="190" height="72" rx="10"/><text class="parttext" x="1240" y="178">ChatService</text>
+  <rect class="ext" x="1390" y="135" width="190" height="72" rx="10"/><text class="parttext" x="1485" y="178">Gemini API</text>
+
+  <path class="lifeline" d="M120 207V1545M340 207V1545M565 207V1545M790 207V1545M1015 207V1545M1240 207V1545M1485 207V1545"/>
+  <path class="msg" d="M120 255H340"/><text class="msgtext" x="230" y="246">Enter message</text>
+  <path class="msg" d="M340 315H565"/><text class="msgtext" x="452" y="306">POST chat with session and CSRF</text>
+  <path class="msg" d="M565 375H790"/><text class="msgtext" x="677" y="366">Submit student message</text>
+  <path class="msg" d="M790 435H1015"/><text class="msgtext" x="902" y="426">Find or create owned conversation</text>
+  <path class="return" d="M1015 460H790"/><text class="msgtext" x="902" y="451">Conversation row</text>
+  <path class="msg" d="M790 505H1015"/><text class="msgtext" x="902" y="496">Load recent completed turns</text>
+  <path class="return" d="M1015 530H790"/><text class="msgtext" x="902" y="521">Conversation history</text>
+  <path class="msg" d="M790 575H1015"/><text class="msgtext" x="902" y="566">Save pending student message</text>
+  <path class="return" d="M1015 600H790"/><text class="msgtext" x="902" y="591">Saved message</text>
+  <path class="msg" d="M790 645H1240"/><text class="msgtext" x="1015" y="636">Generate answer with history</text>
+  <path class="msg" d="M1240 695H1485"/><text class="msgtext" x="1362" y="686">POST generateContent</text>
+
+  <rect class="frame" x="55" y="720" width="1540" height="800" rx="8"/>
+  <rect class="success" x="55" y="720" width="1540" height="395"/>
+  <text class="frametext" x="75" y="748">alt  Gemini returns an answer</text>
+  <path class="return" d="M1485 785H1240"/><text class="msgtext" x="1362" y="776">Generated answer</text>
+  <path class="return" d="M1240 835H790"/><text class="msgtext" x="1015" y="826">Answer text</text>
+  <path class="msg" d="M790 885H1015"/><text class="msgtext" x="902" y="876">Save assistant; mark student complete</text>
+  <path class="return" d="M1015 915H790"/><text class="msgtext" x="902" y="906">Commit message updates</text>
+  <path class="return" d="M790 965H565"/><text class="msgtext" x="677" y="956">Answer and conversation ID</text>
+  <path class="return" d="M565 1015H340"/><text class="msgtext" x="452" y="1006">HTTP success with answer</text>
+  <path class="return" d="M340 1065H120"/><text class="msgtext" x="230" y="1056">Display assistant response</text>
+
+  <path d="M55 1115H1595" stroke="#9cafbd" stroke-width="2" stroke-dasharray="8 6"/>
+  <rect class="failure" x="55" y="1115" width="1540" height="405"/>
+  <text class="frametext" x="75" y="1145">else  Gemini provider or connection failure</text>
+  <path class="return" d="M1485 1180H1240"/><text class="msgtext" x="1362" y="1171">Provider or network error</text>
+  <path class="return" d="M1240 1230H790"/><text class="msgtext" x="1015" y="1221">Service error</text>
+  <path class="msg" d="M790 1280H1015"/><text class="msgtext" x="902" y="1271">Mark student message failed</text>
+  <path class="return" d="M1015 1310H790"/><text class="msgtext" x="902" y="1301">Persist failure status</text>
+  <path class="return" d="M790 1360H565"/><text class="msgtext" x="677" y="1351">Error result and status code</text>
+  <path class="return" d="M565 1410H340"/><text class="msgtext" x="452" y="1401">HTTP error response</text>
+  <path class="return" d="M340 1460H120"/><text class="msgtext" x="230" y="1451">Display failure message</text>
+</svg>

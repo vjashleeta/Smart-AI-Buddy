@@ -1,0 +1,69 @@
+classDiagram
+direction LR
+
+class AuthenticationController
+class RegistrationController
+class RegistrationService
+class EmailVerificationService
+class PasswordResetService
+class PasswordResetRateLimiter
+interface VerificationEmailSender
+class SmtpVerificationEmailSender
+class SecurityConfiguration
+class PasswordEncoderConfiguration
+interface JpaRepository
+interface PasswordEncoder
+
+class UserRepository
+class EmailVerificationCodeRepository
+class PasswordResetTokenRepository
+class User
+class EmailVerificationCode
+class PasswordResetToken
+class VerificationPurpose
+
+class LoginRequest
+class ForgotPasswordRequest
+class ResetPasswordRequest
+class RegistrationRequest
+class RegistrationResponse
+class EmailVerificationRequest
+class ResendVerificationRequest
+class CsrfTokenResponse
+
+RegistrationController ..> RegistrationService : registers
+RegistrationController ..> EmailVerificationService : verifies and resends
+RegistrationController ..> RegistrationRequest : accepts
+RegistrationController ..> RegistrationResponse : returns
+RegistrationController ..> EmailVerificationRequest : accepts
+RegistrationController ..> ResendVerificationRequest : accepts
+AuthenticationController ..> PasswordResetService : requests reset
+AuthenticationController ..> LoginRequest : accepts
+AuthenticationController ..> ForgotPasswordRequest : accepts
+AuthenticationController ..> ResetPasswordRequest : accepts
+AuthenticationController ..> CsrfTokenResponse : returns
+
+RegistrationService ..> UserRepository : persists user
+RegistrationService ..> EmailVerificationService : sends verification code
+EmailVerificationService ..> UserRepository : looks up user
+EmailVerificationService ..> EmailVerificationCodeRepository : reads and saves code
+EmailVerificationService ..> VerificationEmailSender : sends code
+PasswordResetService ..> UserRepository : updates password
+PasswordResetService ..> PasswordResetTokenRepository : reads and saves token
+PasswordResetService ..> VerificationEmailSender : sends reset link
+PasswordResetService ..> PasswordResetRateLimiter : applies IP limit
+SmtpVerificationEmailSender ..|> VerificationEmailSender : implements
+
+SecurityConfiguration ..> UserRepository : loads user details
+PasswordEncoderConfiguration ..> PasswordEncoder : provides encoder
+RegistrationService ..> PasswordEncoder : encodes password
+EmailVerificationService ..> PasswordEncoder : hashes code
+PasswordResetService ..> PasswordEncoder : encodes password
+
+JpaRepository <|.. UserRepository : extends
+JpaRepository <|.. EmailVerificationCodeRepository : extends
+JpaRepository <|.. PasswordResetTokenRepository : extends
+
+User "1" --> "0..*" EmailVerificationCode : owns
+User "1" --> "0..1" PasswordResetToken : owns
+EmailVerificationCode ..> VerificationPurpose : purpose

@@ -1,0 +1,49 @@
+classDiagram
+direction LR
+
+class ChatController
+class SocraticController
+class ChatHistoryService
+class ChatService
+class ChatConfiguration
+class UserRepository
+class ChatConversationRepository
+class ChatMessageRepository
+class User
+class ChatConversation
+class ChatMessage
+class ChatMessageRole
+class ChatMessageStatus
+class ChatMessageRequest
+class ChatMessageResponse
+class ChatConversationResponse
+class ChatStoredMessageResponse
+class ChatSubmissionResult
+class ChatTurn
+class SocraticRequest
+interface JpaRepository
+
+ChatController ..> ChatHistoryService : submits and reads history
+ChatController ..> ChatMessageRequest : accepts
+ChatController ..> ChatMessageResponse : returns
+ChatController ..> ChatConversationResponse : returns
+ChatController ..> ChatStoredMessageResponse : returns
+ChatHistoryService ..> ChatService : requests Gemini answer
+ChatHistoryService ..> UserRepository : loads student
+ChatHistoryService ..> ChatConversationRepository : manages conversation
+ChatHistoryService ..> ChatMessageRepository : stores and loads messages
+ChatHistoryService ..> ChatSubmissionResult : returns submission result
+ChatHistoryService ..> ChatTurn : builds recent history
+ChatService ..> ChatTurn : sends context
+SocraticController ..> ChatService : requests Socratic answer
+SocraticController ..> SocraticRequest : accepts
+ChatConfiguration ..> ChatService : supplies RestClient builder
+
+User "1" --> "0..*" ChatConversation : owns
+ChatConversation "1" --> "0..*" ChatMessage : contains
+ChatMessage ..> ChatMessageRole : role
+ChatMessage ..> ChatMessageStatus : status
+
+JpaRepository <|.. UserRepository : extends
+JpaRepository <|.. ChatConversationRepository : extends
+JpaRepository <|.. ChatMessageRepository : extends

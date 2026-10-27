@@ -1,0 +1,136 @@
+%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#edf4f8","primaryTextColor":"#17324d","primaryBorderColor":"#6f8ba2","lineColor":"#526b80","secondaryColor":"#e7f0eb","tertiaryColor":"#ffffff","fontFamily":"Arial"}}}%%
+erDiagram
+    users {
+        BIGINT id PK
+        VARCHAR name
+        VARCHAR college_email UK
+        VARCHAR password_hash
+        BOOLEAN email_verified
+    }
+    email_verification_codes {
+        BIGINT id PK
+        BIGINT user_id FK
+        VARCHAR purpose
+        VARCHAR code_hash
+        DATETIME expires_at
+        INTEGER attempts
+        INTEGER resend_count
+        DATETIME resend_window_started_at
+        DATETIME last_sent_at
+        DATETIME consumed_at
+    }
+    password_reset_tokens {
+        BIGINT id PK
+        BIGINT user_id FK, UK
+        VARCHAR token_hash
+        DATETIME expires_at
+        DATETIME consumed_at
+        DATETIME request_window_started_at
+        DATETIME last_requested_at
+        INTEGER request_count
+    }
+    chat_conversations {
+        BIGINT id PK
+        BIGINT student_id FK
+        VARCHAR title
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    chat_messages {
+        BIGINT id PK
+        BIGINT conversation_id FK
+        VARCHAR role
+        TEXT content
+        VARCHAR request_id
+        VARCHAR reply_to_request_id
+        VARCHAR status
+        DATETIME created_at
+    }
+    learning_activities {
+        BIGINT id PK
+        BIGINT student_id FK
+        VARCHAR activity_type
+        DATETIME started_at
+        DATETIME ended_at
+        DATETIME last_heartbeat_at
+        BOOLEAN active
+    }
+    study_plans {
+        BIGINT id PK
+        BIGINT student_id FK, UK
+    }
+    study_sessions {
+        BIGINT id PK
+        BIGINT plan_id FK
+        VARCHAR subject
+        DATE session_date
+        INTEGER duration_minutes
+        INTEGER actual_duration_minutes
+        DATETIME actual_started_at
+        DATETIME completed_at
+    }
+    quiz_study_materials {
+        BIGINT id PK
+        BIGINT student_id FK
+        VARCHAR topic
+        VARCHAR source_text
+        VARCHAR source_filename
+        DATETIME created_at
+        DATETIME deleted_at
+    }
+    quiz_concepts {
+        BIGINT id PK
+        BIGINT material_id FK
+        INTEGER sequence_number
+        VARCHAR source_sentence
+        VARCHAR question_prompt
+        VARCHAR expected_answer
+        INTEGER consecutive_correct
+        INTEGER total_attempts
+        BOOLEAN last_correct
+        DATETIME last_attempt_at
+    }
+    quiz_attempts {
+        BIGINT id PK
+        BIGINT student_id FK
+        INTEGER total_questions
+        INTEGER correct_answers
+        DATETIME created_at
+        DATETIME completed_at
+    }
+    quiz_attempt_questions {
+        BIGINT id PK
+        BIGINT attempt_id FK
+        BIGINT concept_id FK
+        INTEGER question_position
+        VARCHAR question_prompt
+        VARCHAR option_a
+        VARCHAR option_b
+        VARCHAR option_c
+        VARCHAR option_d
+        VARCHAR correct_option
+        VARCHAR explanation
+    }
+    quiz_answers {
+        BIGINT id PK
+        BIGINT attempt_question_id FK, UK
+        VARCHAR submitted_answer
+        BOOLEAN correct
+        DATETIME answered_at
+    }
+
+    users ||--o{ email_verification_codes : verifies
+    users ||--o| password_reset_tokens : resets
+    users ||--o{ chat_conversations : owns
+    chat_conversations ||--o{ chat_messages : contains
+    users ||--o{ learning_activities : records
+    users ||--o| study_plans : owns
+    study_plans ||--o{ study_sessions : schedules
+    users ||--o{ quiz_study_materials : uploads
+    quiz_study_materials ||--o{ quiz_concepts : yields
+    users ||--o{ quiz_attempts : takes
+    quiz_attempts ||--o{ quiz_attempt_questions : includes
+    quiz_concepts ||--o{ quiz_attempt_questions : supplies
+    quiz_attempt_questions ||--o| quiz_answers : answered_by
+
+%% Composite unique keys: email_verification_codes(user_id, purpose); chat_messages(conversation_id, request_id); quiz_concepts(material_id, sequence_number); quiz_attempt_questions(attempt_id, question_position); quiz_attempt_questions(attempt_id, concept_id).

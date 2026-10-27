@@ -883,8 +883,229 @@
     });
   });
 
+  document.querySelectorAll('[data-verification-form]').forEach((form) => {
+    const status = document.querySelector('[data-verification-status]');
+    const message = form.querySelector('[data-form-message]');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const submitLabel = form.querySelector('[data-verify-label]');
+    const emailInput = form.elements.namedItem('email');
+    const codeInput = form.elements.namedItem('code');
+    const resendButton = form.querySelector('[data-resend-verification]');
+    const savedEmail = sessionStorage.getItem('smartAiBuddyVerificationEmail');
+    if (savedEmail) emailInput.value = savedEmail;
+    if (status) {
+      const emailSent = sessionStorage.getItem('smartAiBuddyVerificationEmailSent');
+      status.textContent = emailSent === 'false'
+        ? 'Your account was created, but we could not send the email. Wait a minute, then request another code.'
+        : 'Enter the code sent to your college email. If you just registered, check your inbox and spam folder.';
+      sessionStorage.removeItem('smartAiBuddyVerificationEmailSent');
+    }
+
+    const setBusy = (busy, label) => {
+      if (submitButton) {
+        submitButton.disabled = busy;
+        submitButton.setAttribute('aria-busy', String(busy));
+      }
+      if (resendButton) {
+        resendButton.disabled = busy;
+        resendButton.setAttribute('aria-busy', String(busy));
+      }
+      if (submitLabel) submitLabel.textContent = busy ? label : 'Verify email';
+    };
+    const showMessage = (text, isError) => {
+      if (!message) return;
+      message.textContent = text;
+      message.classList.toggle('is-error', isError);
+    };
+    const postVerificationRequest = async (path, body) => {
+      const csrf = await fetchCsrfToken();
+      return fetch(`${apiBase}${path}`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          [csrf.headerName]: csrf.token,
+        },
+        body: JSON.stringify(body),
+      });
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      showMessage('', false);
+      setBusy(true, 'Verifying...');
+      try {
+        const response = await postVerificationRequest('/api/auth/verify-email', {
+          email: emailInput.value,
+          code: codeInput.value,
+        });
+        if (response.ok) {
+          sessionStorage.removeItem('smartAiBuddyVerificationEmail');
+          showMessage('Email verified. You can now sign in.', false);
+          codeInput.value = '';
+          return;
+        }
+        const result = await response.json().catch(() => null);
+        showMessage(result?.message || 'We could not verify that code. Check it and try again.', true);
+      } catch {
+        showMessage('Unable to reach the verification service. Check your connection and try again.', true);
+      } finally {
+        setBusy(false);
+      }
+    });
+
+    resendButton?.addEventListener('click', async () => {
+      showMessage('', false);
+      setBusy(true, 'Sending...');
+      try {
+        const response = await postVerificationRequest('/api/auth/resend-verification', {
+          email: emailInput.value,
+        });
+        if (response.ok) {
+          showMessage('If this account needs verification, a new code has been sent. Wait 60 seconds before requesting another.', false);
+          return;
+        }
+        const result = await response.json().catch(() => null);
+        showMessage(result?.message || 'Unable to send a new code right now. Please try again later.', true);
+      } catch {
+        showMessage('Unable to reach the verification service. Check your connection and try again.', true);
+      } finally {
+        setBusy(false);
+      }
+    });
+  });
+
   document.querySelectorAll('[data-toast-message]').forEach((button) => {
     button.addEventListener('click', () => showToast(button.dataset.toastMessage || 'This demo action is not connected yet.'));
+  });
+
+  document.querySelectorAll('[data-forgot-password-form]').forEach((form) => {
+    const message = form.querySelector('[data-form-message]');
+    const button = form.querySelector('button[type="submit"]');
+    const label = form.querySelector('[data-forgot-label]');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (button?.disabled) return;
+      if (message) {
+        message.textContent = '';
+        message.classList.remove('is-error');
+      }
+      if (button) {
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+      }
+      if (label) label.textContent = 'Sending...';
+      try {
+        const csrf = await fetchCsrfToken();
+        const response = await fetch(`${apiBase}/api/auth/forgot-password`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            [csrf.headerName]: csrf.token,
+          },
+          body: JSON.stringify({ email: form.elements.namedItem('email').value }),
+        });
+        const result = await response.json().catch(() => null);
+        if (!response.ok) {
+          if (message) {
+            message.textContent = result?.message || 'Unable to process your request right now. Please try again later.';
+            message.classList.add('is-error');
+          }
+          return;
+        }
+        if (message) message.textContent = result?.message
+          || 'If an eligible account exists for that email, password reset instructions will be sent.';
+      } catch {
+        if (message) {
+          message.textContent = 'Unable to reach the password reset service. Check your connection and try again.';
+          message.classList.add('is-error');
+        }
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+        }
+        if (label) label.textContent = 'Send reset link';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-reset-password-form]').forEach((form) => {
+    const message = form.querySelector('[data-form-message]');
+    const button = form.querySelector('button[type="submit"]');
+    const label = form.querySelector('[data-reset-label]');
+    const tokenInput = form.elements.namedItem('token');
+    const token = new URLSearchParams(window.location.hash.slice(1)).get('token') || '';
+    tokenInput.value = token;
+    if (token) window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
+    else if (message) {
+      message.textContent = 'This reset link is missing or invalid. Request a new link to continue.';
+      message.classList.add('is-error');
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (button?.disabled) return;
+      if (!tokenInput.value) {
+        if (message) {
+          message.textContent = 'This reset link is missing or invalid. Request a new link to continue.';
+          message.classList.add('is-error');
+        }
+        return;
+      }
+      if (message) {
+        message.textContent = '';
+        message.classList.remove('is-error');
+      }
+      if (button) {
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+      }
+      if (label) label.textContent = 'Resetting...';
+      try {
+        const csrf = await fetchCsrfToken();
+        const response = await fetch(`${apiBase}/api/auth/reset-password`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            [csrf.headerName]: csrf.token,
+          },
+          body: JSON.stringify({
+            token: tokenInput.value,
+            newPassword: form.elements.namedItem('newPassword').value,
+            confirmPassword: form.elements.namedItem('confirmPassword').value,
+          }),
+        });
+        if (response.ok) {
+          form.reset();
+          tokenInput.value = '';
+          if (message) {
+            message.textContent = 'Your password was reset. You can now sign in.';
+            message.classList.remove('is-error');
+          }
+          return;
+        }
+        const result = await response.json().catch(() => null);
+        if (message) {
+          message.textContent = result?.message || 'The reset could not be completed. Check your details or request a new link.';
+          message.classList.add('is-error');
+        }
+      } catch {
+        if (message) {
+          message.textContent = 'Unable to reach the password reset service. Check your connection and try again.';
+          message.classList.add('is-error');
+        }
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+        }
+        if (label) label.textContent = 'Reset password';
+      }
+    });
   });
 
   document.querySelectorAll('[data-registration-form]').forEach((form) => {
@@ -943,8 +1164,11 @@
           return;
         }
 
-        if (message) message.textContent = 'Your account was created successfully.';
+        const email = result?.email || form.elements.namedItem('email').value.trim();
+        sessionStorage.setItem('smartAiBuddyVerificationEmail', email);
+        sessionStorage.setItem('smartAiBuddyVerificationEmailSent', String(result?.verificationEmailSent !== false));
         form.reset();
+        window.location.assign('verify-email.html');
       } catch {
         if (message) {
           message.textContent = 'Unable to reach the registration service. Check that the backend is running and try again.';

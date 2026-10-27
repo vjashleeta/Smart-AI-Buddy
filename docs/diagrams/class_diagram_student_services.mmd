@@ -1,0 +1,70 @@
+classDiagram
+direction LR
+
+class PlannerController
+class LearningActivityController
+class StudentSettingsController
+class StudentAnalyticsController
+class PlannerService
+class LearningActivityService
+class StudentSettingsService
+class StudentAnalyticsService
+class UserRepository
+class StudyPlanRepository
+class StudySessionRepository
+class LearningActivityRepository
+class QuizAttemptRepository
+class ChatMessageRepository
+class TimeConfiguration
+class User
+class StudyPlan
+class StudySession
+class LearningActivity
+class LearningActivityType
+class CreateStudySessionRequest
+class RecordActualStudyTimeRequest
+class StartLearningActivityRequest
+class UpdateStudentProfileRequest
+class ChangePasswordRequest
+class DashboardResponse
+class PerformanceResponse
+interface JpaRepository
+
+PlannerController ..> PlannerService : manages schedule
+PlannerController ..> CreateStudySessionRequest : accepts
+PlannerController ..> RecordActualStudyTimeRequest : accepts
+LearningActivityController ..> LearningActivityService : tracks activity
+LearningActivityController ..> StartLearningActivityRequest : accepts
+StudentSettingsController ..> StudentSettingsService : manages settings
+StudentSettingsController ..> UpdateStudentProfileRequest : accepts
+StudentSettingsController ..> ChangePasswordRequest : accepts
+StudentAnalyticsController ..> StudentAnalyticsService : requests reports
+StudentAnalyticsController ..> DashboardResponse : returns
+StudentAnalyticsController ..> PerformanceResponse : returns
+PlannerService ..> UserRepository : loads student
+PlannerService ..> StudyPlanRepository : reads and saves plan
+PlannerService ..> StudySessionRepository : reads and saves sessions
+LearningActivityService ..> UserRepository : loads student
+LearningActivityService ..> LearningActivityRepository : records activity
+StudentSettingsService ..> UserRepository : updates user
+StudentAnalyticsService ..> UserRepository : loads student
+StudentAnalyticsService ..> QuizAttemptRepository : reads quiz history
+StudentAnalyticsService ..> StudyPlanRepository : reads plans
+StudentAnalyticsService ..> StudySessionRepository : reads sessions
+StudentAnalyticsService ..> LearningActivityRepository : reads activities
+StudentAnalyticsService ..> ChatMessageRepository : reads chat activity
+TimeConfiguration ..> PlannerService : supplies Clock
+TimeConfiguration ..> LearningActivityService : supplies Clock
+TimeConfiguration ..> StudentAnalyticsService : supplies Clock
+
+User "1" --> "0..1" StudyPlan : owns
+StudyPlan "1" --> "0..*" StudySession : schedules
+User "1" --> "0..*" LearningActivity : records
+LearningActivity ..> LearningActivityType : activity kind
+
+JpaRepository <|.. UserRepository : extends
+JpaRepository <|.. StudyPlanRepository : extends
+JpaRepository <|.. StudySessionRepository : extends
+JpaRepository <|.. LearningActivityRepository : extends
+JpaRepository <|.. QuizAttemptRepository : extends
+JpaRepository <|.. ChatMessageRepository : extends

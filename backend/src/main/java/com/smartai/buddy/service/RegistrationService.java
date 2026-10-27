@@ -18,10 +18,16 @@ public class RegistrationService {
 
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final EmailVerificationService emailVerificationService;
 
-	public RegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+	public RegistrationService(
+		UserRepository userRepository,
+		PasswordEncoder passwordEncoder,
+		EmailVerificationService emailVerificationService
+	) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.emailVerificationService = emailVerificationService;
 	}
 
 	@Transactional
@@ -35,12 +41,18 @@ public class RegistrationService {
 			throw new DuplicateEmailException();
 		}
 
-		User user = new User(name, email, passwordEncoder.encode(request.password()));
+		User user = new User(name, email, passwordEncoder.encode(request.password()), false);
 		try {
 			user = userRepository.saveAndFlush(user);
 		} catch (DataIntegrityViolationException exception) {
 			throw new DuplicateEmailException();
 		}
-		return new RegistrationResponse(user.getId(), user.getName(), user.getCollegeEmail());
+		boolean verificationEmailSent = emailVerificationService.createAndSendCode(user);
+		return new RegistrationResponse(
+			user.getId(),
+			user.getName(),
+			user.getCollegeEmail(),
+			verificationEmailSent
+		);
 	}
 }

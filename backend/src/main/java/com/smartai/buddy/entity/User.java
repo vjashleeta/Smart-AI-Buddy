@@ -31,13 +31,21 @@ public class User {
 	@Column(name = "password_hash", nullable = false, length = 60)
 	private String passwordHash;
 
+	@Column(name = "email_verified", nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT TRUE")
+	private boolean emailVerified = true;
+
 	protected User() {
 	}
 
 	public User(String name, String collegeEmail, String passwordHash) {
+		this(name, collegeEmail, passwordHash, true);
+	}
+
+	public User(String name, String collegeEmail, String passwordHash, boolean emailVerified) {
 		this.name = name;
 		this.collegeEmail = collegeEmail;
 		this.passwordHash = passwordHash;
+		this.emailVerified = emailVerified;
 	}
 
 	public Long getId() {
@@ -54,6 +62,14 @@ public class User {
 
 	public String getPasswordHash() {
 		return passwordHash;
+	}
+
+	public boolean isEmailVerified() {
+		return emailVerified;
+	}
+
+	public void verifyEmail() {
+		emailVerified = true;
 	}
 
 	public void updateName(String name) {

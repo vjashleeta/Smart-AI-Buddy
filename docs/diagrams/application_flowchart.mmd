@@ -1,0 +1,80 @@
+%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#edf4f8","primaryTextColor":"#17324d","primaryBorderColor":"#6f8ba2","lineColor":"#526b80","secondaryColor":"#e7f0eb","tertiaryColor":"#ffffff","fontFamily":"Arial"}}}%%
+flowchart LR
+    Start(("Start"))
+    Entry["Open application"]
+    AuthChoice{"Sign in, register or recover?"}
+    Login["Public login page"]
+    Register["Register account"]
+    Verify["Verify email using emailed code"]
+    Recover["Request password reset"]
+    Reset["Use reset link and set password"]
+    Authenticate["POST login through Spring Security"]
+    LoginOK{"Credentials valid and email verified?"}
+    LoginError["Show login error"]
+    Session["Create authenticated session"]
+    Dashboard["Redirect to dashboard"]
+    Features{"Choose a feature"}
+    Chat["AI Buddy chat"]
+    Tutor["Socratic Tutor"]
+    Planner["Study planner"]
+    Quiz["Quiz and study materials"]
+    Resources["Resources and PDF upload"]
+    Analytics["Dashboard and performance"]
+    Settings["Profile and password settings"]
+    APIs["Feature controller and service"]
+    Data{"Does this feature use stored data?"}
+    Database[("MySQL through JPA and Hibernate")]
+    External{"Does this feature need an external or PDF service?"}
+    Services["Gemini API, SMTP, or PDFBox as applicable"]
+    Result["Return result to browser and display"]
+    Continue{"Continue using the application?"}
+    Logout["POST logout and invalidate session"]
+    LoggedOut["Return to public login page"]
+    Exit(("Exit authenticated session"))
+
+    Start --> Entry --> AuthChoice
+    AuthChoice -->|"Sign in"| Login
+    AuthChoice -->|"Register"| Register
+    AuthChoice -->|"Recover password"| Recover
+    Register -->|"Save account and send verification email"| Verify
+    Verify -->|"Verified"| Login
+    Recover -->|"Send reset link by email"| Reset
+    Reset --> Login
+    Login --> Authenticate --> LoginOK
+    LoginOK -->|"No"| LoginError --> Login
+    LoginOK -->|"Yes"| Session --> Dashboard --> Features
+    Features --> Chat
+    Features --> Tutor
+    Features --> Planner
+    Features --> Quiz
+    Features --> Resources
+    Features --> Analytics
+    Features --> Settings
+    Chat --> APIs
+    Tutor --> APIs
+    Planner --> APIs
+    Quiz --> APIs
+    Resources --> APIs
+    Analytics --> APIs
+    Settings --> APIs
+    APIs --> Data
+    Data -->|"Yes when required"| Database
+    Data -->|"No"| External
+    Database --> External
+    External -->|"Yes when required"| Services
+    External -->|"No"| Result
+    Services --> Result
+    Result --> Continue
+    Continue -->|"Yes"| Features
+    Continue -->|"No, log out"| Logout --> LoggedOut --> Exit
+
+    classDef startEnd fill:#173d34,stroke:#173d34,color:#ffffff,stroke-width:1.5px
+    classDef user fill:#e7f1ec,stroke:#557f72,color:#163a32,stroke-width:1.5px
+    classDef process fill:#edf4f8,stroke:#6f8ba2,color:#17324d,stroke-width:1.5px
+    classDef decision fill:#fff4e5,stroke:#bd9152,color:#4d3820,stroke-width:1.5px
+    classDef data fill:#fff4e5,stroke:#bd9152,color:#4d3820,stroke-width:1.5px
+    class Start,Exit startEnd
+    class Entry,Login,Register,Verify,Recover,Reset,LoginError,Dashboard,Chat,Tutor,Planner,Quiz,Resources,Analytics,Settings,Result user
+    class Authenticate,Session,APIs,Services,Logout process
+    class AuthChoice,LoginOK,Features,Data,External,Continue decision
+    class Database data

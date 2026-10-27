@@ -221,7 +221,7 @@ class StudentAnalyticsIntegrationTests {
 			student,
 			LearningActivityType.SOCRATIC_TUTOR,
 			twoDaysAgo.atTime(12, 0),
-			twoDaysAgo.atTime(12, 1)
+			twoDaysAgo.atTime(12, 0).plusSeconds(1)
 		));
 
 		User otherStudent = userRepository.findByCollegeEmail(otherStudentEmail).orElseThrow();
@@ -258,11 +258,11 @@ class StudentAnalyticsIntegrationTests {
 		StudySession oldSession = new StudySession(
 			plan,
 			"Biology",
-			LocalDate.now(clock).minusDays(3),
+			LocalDate.now(clock).minusDays(8),
 			45
 		);
-		oldSession.recordActualDuration(20, LocalDateTime.now(clock).minusDays(3));
-		oldSession.markCompleted(LocalDateTime.now(clock).minusDays(3));
+		oldSession.recordActualDuration(20, LocalDateTime.now(clock).minusDays(8));
+		oldSession.markCompleted(LocalDateTime.now(clock).minusDays(8));
 		studySessionRepository.saveAndFlush(oldSession);
 
 		mockMvc.perform(get("/api/student/dashboard").with(user(studentWithoutCurrentStreak.getCollegeEmail())))

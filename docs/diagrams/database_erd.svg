@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1900" viewBox="0 0 2200 1900" role="img" aria-labelledby="title desc">
+<title id="title">Figure 4.2 - Smart AI Buddy Database ERD</title><desc id="desc">Thirteen JPA entity tables with mapped columns, primary and foreign keys, and verified cardinalities.</desc>
+<defs><style>text{font-family:Arial,sans-serif;fill:#17324d}.title{font-size:34px;font-weight:700}.sub{font-size:18px;fill:#526b80}.card{fill:#fff;stroke:#6f8ba2;stroke-width:2}.headtext{font-size:19px;font-weight:700}.row{font-size:16px}.section{font-size:21px;font-weight:700}.rel{font-size:16px}.note{font-size:15px;fill:#526b80}</style></defs><rect width="2200" height="1900" fill="#fff"/>
+<text class="title" x="55" y="60">Figure 4.2  Database Entity-Relationship Diagram</text>
+<text class="sub" x="55" y="92">Mapped tables and columns from JPA entities; PK, FK and UK marks come from annotations and checked-in SQL</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="55" y="120" width="490" height="167" rx="10"/>
+<path d="M55 162 H545" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M56 130 Q56 121 65 121 H535 Q544 121 544 130 V162 H56 Z" fill="#eaf1f6"/>
+<text class="headtext" x="70" y="148">users</text>
+<text class="row" x="70" y="186">id    BIGINT    [PK]</text>
+<text class="row" x="70" y="211">name    VARCHAR</text>
+<text class="row" x="70" y="236">college_email    VARCHAR    [UK]</text>
+<text class="row" x="70" y="261">password_hash    VARCHAR</text>
+<text class="row" x="70" y="286">email_verified    BOOLEAN</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="580" y="120" width="490" height="292" rx="10"/>
+<path d="M580 162 H1070" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M581 130 Q581 121 590 121 H1060 Q1069 121 1069 130 V162 H581 Z" fill="#eaf1f6"/>
+<text class="headtext" x="595" y="148">email_verification_codes</text>
+<text class="row" x="595" y="186">id    BIGINT    [PK]</text>
+<text class="row" x="595" y="211">user_id    BIGINT    [FK]</text>
+<text class="row" x="595" y="236">purpose    VARCHAR</text>
+<text class="row" x="595" y="261">code_hash    VARCHAR</text>
+<text class="row" x="595" y="286">expires_at    DATETIME</text>
+<text class="row" x="595" y="311">attempts    INTEGER</text>
+<text class="row" x="595" y="336">resend_count    INTEGER</text>
+<text class="row" x="595" y="361">resend_window_started_at    DATETIME</text>
+<text class="row" x="595" y="386">last_sent_at    DATETIME</text>
+<text class="row" x="595" y="411">consumed_at    DATETIME</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="580" y="445" width="490" height="242" rx="10"/>
+<path d="M580 487 H1070" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M581 455 Q581 446 590 446 H1060 Q1069 446 1069 455 V487 H581 Z" fill="#eaf1f6"/>
+<text class="headtext" x="595" y="473">password_reset_tokens</text>
+<text class="row" x="595" y="511">id    BIGINT    [PK]</text>
+<text class="row" x="595" y="536">user_id    BIGINT    [FK, UK]</text>
+<text class="row" x="595" y="561">token_hash    VARCHAR</text>
+<text class="row" x="595" y="586">expires_at    DATETIME</text>
+<text class="row" x="595" y="611">consumed_at    DATETIME</text>
+<text class="row" x="595" y="636">request_window_started_at    DATETIME</text>
+<text class="row" x="595" y="661">last_requested_at    DATETIME</text>
+<text class="row" x="595" y="686">request_count    INTEGER</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="55" y="390" width="490" height="167" rx="10"/>
+<path d="M55 432 H545" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M56 400 Q56 391 65 391 H535 Q544 391 544 400 V432 H56 Z" fill="#eaf1f6"/>
+<text class="headtext" x="70" y="418">chat_conversations</text>
+<text class="row" x="70" y="456">id    BIGINT    [PK]</text>
+<text class="row" x="70" y="481">student_id    BIGINT    [FK]</text>
+<text class="row" x="70" y="506">title    VARCHAR</text>
+<text class="row" x="70" y="531">created_at    DATETIME</text>
+<text class="row" x="70" y="556">updated_at    DATETIME</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="1105" y="120" width="490" height="242" rx="10"/>
+<path d="M1105 162 H1595" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M1106 130 Q1106 121 1115 121 H1585 Q1594 121 1594 130 V162 H1106 Z" fill="#eaf1f6"/>
+<text class="headtext" x="1120" y="148">chat_messages</text>
+<text class="row" x="1120" y="186">id    BIGINT    [PK]</text>
+<text class="row" x="1120" y="211">conversation_id    BIGINT    [FK]</text>
+<text class="row" x="1120" y="236">role    VARCHAR</text>
+<text class="row" x="1120" y="261">content    TEXT</text>
+<text class="row" x="1120" y="286">request_id    VARCHAR</text>
+<text class="row" x="1120" y="311">reply_to_request_id    VARCHAR</text>
+<text class="row" x="1120" y="336">status    VARCHAR</text>
+<text class="row" x="1120" y="361">created_at    DATETIME</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="55" y="660" width="490" height="217" rx="10"/>
+<path d="M55 702 H545" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M56 670 Q56 661 65 661 H535 Q544 661 544 670 V702 H56 Z" fill="#eaf1f6"/>
+<text class="headtext" x="70" y="688">learning_activities</text>
+<text class="row" x="70" y="726">id    BIGINT    [PK]</text>
+<text class="row" x="70" y="751">student_id    BIGINT    [FK]</text>
+<text class="row" x="70" y="776">activity_type    VARCHAR</text>
+<text class="row" x="70" y="801">started_at    DATETIME</text>
+<text class="row" x="70" y="826">ended_at    DATETIME</text>
+<text class="row" x="70" y="851">last_heartbeat_at    DATETIME</text>
+<text class="row" x="70" y="876">active    BOOLEAN</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="55" y="975" width="490" height="92" rx="10"/>
+<path d="M55 1017 H545" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M56 985 Q56 976 65 976 H535 Q544 976 544 985 V1017 H56 Z" fill="#eaf1f6"/>
+<text class="headtext" x="70" y="1003">study_plans</text>
+<text class="row" x="70" y="1041">id    BIGINT    [PK]</text>
+<text class="row" x="70" y="1066">student_id    BIGINT    [FK, UK]</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="55" y="1125" width="490" height="242" rx="10"/>
+<path d="M55 1167 H545" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M56 1135 Q56 1126 65 1126 H535 Q544 1126 544 1135 V1167 H56 Z" fill="#eaf1f6"/>
+<text class="headtext" x="70" y="1153">study_sessions</text>
+<text class="row" x="70" y="1191">id    BIGINT    [PK]</text>
+<text class="row" x="70" y="1216">plan_id    BIGINT    [FK]</text>
+<text class="row" x="70" y="1241">subject    VARCHAR</text>
+<text class="row" x="70" y="1266">session_date    DATE</text>
+<text class="row" x="70" y="1291">duration_minutes    INTEGER</text>
+<text class="row" x="70" y="1316">actual_duration_minutes    INTEGER</text>
+<text class="row" x="70" y="1341">actual_started_at    DATETIME</text>
+<text class="row" x="70" y="1366">completed_at    DATETIME</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="580" y="720" width="490" height="217" rx="10"/>
+<path d="M580 762 H1070" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M581 730 Q581 721 590 721 H1060 Q1069 721 1069 730 V762 H581 Z" fill="#eaf1f6"/>
+<text class="headtext" x="595" y="748">quiz_study_materials</text>
+<text class="row" x="595" y="786">id    BIGINT    [PK]</text>
+<text class="row" x="595" y="811">student_id    BIGINT    [FK]</text>
+<text class="row" x="595" y="836">topic    VARCHAR</text>
+<text class="row" x="595" y="861">source_text    VARCHAR</text>
+<text class="row" x="595" y="886">source_filename    VARCHAR</text>
+<text class="row" x="595" y="911">created_at    DATETIME</text>
+<text class="row" x="595" y="936">deleted_at    DATETIME</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="580" y="1000" width="490" height="292" rx="10"/>
+<path d="M580 1042 H1070" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M581 1010 Q581 1001 590 1001 H1060 Q1069 1001 1069 1010 V1042 H581 Z" fill="#eaf1f6"/>
+<text class="headtext" x="595" y="1028">quiz_concepts</text>
+<text class="row" x="595" y="1066">id    BIGINT    [PK]</text>
+<text class="row" x="595" y="1091">material_id    BIGINT    [FK]</text>
+<text class="row" x="595" y="1116">sequence_number    INTEGER</text>
+<text class="row" x="595" y="1141">source_sentence    VARCHAR</text>
+<text class="row" x="595" y="1166">question_prompt    VARCHAR</text>
+<text class="row" x="595" y="1191">expected_answer    VARCHAR</text>
+<text class="row" x="595" y="1216">consecutive_correct    INTEGER</text>
+<text class="row" x="595" y="1241">total_attempts    INTEGER</text>
+<text class="row" x="595" y="1266">last_correct    BOOLEAN</text>
+<text class="row" x="595" y="1291">last_attempt_at    DATETIME</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="1630" y="120" width="490" height="192" rx="10"/>
+<path d="M1630 162 H2120" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M1631 130 Q1631 121 1640 121 H2110 Q2119 121 2119 130 V162 H1631 Z" fill="#eaf1f6"/>
+<text class="headtext" x="1645" y="148">quiz_attempts</text>
+<text class="row" x="1645" y="186">id    BIGINT    [PK]</text>
+<text class="row" x="1645" y="211">student_id    BIGINT    [FK]</text>
+<text class="row" x="1645" y="236">total_questions    INTEGER</text>
+<text class="row" x="1645" y="261">correct_answers    INTEGER</text>
+<text class="row" x="1645" y="286">created_at    DATETIME</text>
+<text class="row" x="1645" y="311">completed_at    DATETIME</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="1105" y="410" width="490" height="317" rx="10"/>
+<path d="M1105 452 H1595" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M1106 420 Q1106 411 1115 411 H1585 Q1594 411 1594 420 V452 H1106 Z" fill="#eaf1f6"/>
+<text class="headtext" x="1120" y="438">quiz_attempt_questions</text>
+<text class="row" x="1120" y="476">id    BIGINT    [PK]</text>
+<text class="row" x="1120" y="501">attempt_id    BIGINT    [FK]</text>
+<text class="row" x="1120" y="526">concept_id    BIGINT    [FK]</text>
+<text class="row" x="1120" y="551">question_position    INTEGER</text>
+<text class="row" x="1120" y="576">question_prompt    VARCHAR</text>
+<text class="row" x="1120" y="601">option_a    VARCHAR</text>
+<text class="row" x="1120" y="626">option_b    VARCHAR</text>
+<text class="row" x="1120" y="651">option_c    VARCHAR</text>
+<text class="row" x="1120" y="676">option_d    VARCHAR</text>
+<text class="row" x="1120" y="701">correct_option    VARCHAR</text>
+<text class="row" x="1120" y="726">explanation    VARCHAR</text>
+<rect fill="#fff" stroke="#6f8ba2" stroke-width="2" x="1105" y="770" width="490" height="167" rx="10"/>
+<path d="M1105 812 H1595" stroke="#6f8ba2" stroke-width="1.5"/>
+<path d="M1106 780 Q1106 771 1115 771 H1585 Q1594 771 1594 780 V812 H1106 Z" fill="#eaf1f6"/>
+<text class="headtext" x="1120" y="798">quiz_answers</text>
+<text class="row" x="1120" y="836">id    BIGINT    [PK]</text>
+<text class="row" x="1120" y="861">attempt_question_id    BIGINT    [FK, UK]</text>
+<text class="row" x="1120" y="886">submitted_answer    VARCHAR</text>
+<text class="row" x="1120" y="911">correct    BOOLEAN</text>
+<text class="row" x="1120" y="936">answered_at    DATETIME</text>
+<rect x="55" y="1460" width="2090" height="355" rx="14" fill="#f7fafc" stroke="#9cafbd" stroke-width="2"/>
+<text class="section" x="80" y="1500">Mapped relationships and cardinalities</text>
+<text class="rel" x="80" y="1540">users  1 : many  email_verification_codes</text>
+<text class="rel" x="80" y="1573">users  1 : 0..1  password_reset_tokens</text>
+<text class="rel" x="80" y="1606">users  1 : many  chat_conversations</text>
+<text class="rel" x="80" y="1639">chat_conversations  1 : many  chat_messages</text>
+<text class="rel" x="80" y="1672">users  1 : many  learning_activities</text>
+<text class="rel" x="80" y="1705">users  1 : 0..1  study_plans</text>
+<text class="rel" x="80" y="1738">study_plans  1 : many  study_sessions</text>
+<text class="rel" x="1120" y="1540">users  1 : many  quiz_study_materials</text>
+<text class="rel" x="1120" y="1573">quiz_study_materials  1 : many  quiz_concepts</text>
+<text class="rel" x="1120" y="1606">users  1 : many  quiz_attempts</text>
+<text class="rel" x="1120" y="1639">quiz_attempts  1 : many  quiz_attempt_questions</text>
+<text class="rel" x="1120" y="1672">quiz_concepts  1 : many  quiz_attempt_questions</text>
+<text class="rel" x="1120" y="1705">quiz_attempt_questions  1 : 0..1  quiz_answers</text>
+<text class="note" x="80" y="1782">Composite unique keys: email_verification_codes(user_id, purpose); chat_messages(conversation_id, request_id); quiz_concepts(material_id, sequence_number); quiz_attempt_questions(attempt_id, question_position) and (attempt_id, concept_id).</text>
+<text class="note" x="80" y="1805">Column names use Hibernate snake-case conventions where no explicit @Column name is given. See README for the live-schema limitation.</text>
+</svg>

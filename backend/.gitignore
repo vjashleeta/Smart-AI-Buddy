@@ -30,3 +30,7 @@ build/
 
 ### VS Code ###
 .vscode/
+# Protect environment files and API secrets
+.env
+.env.*
+!.env.example

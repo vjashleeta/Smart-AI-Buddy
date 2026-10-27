@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 4.1 - Smart AI Buddy System Architecture</title>
+  <desc id="desc">Browser, bundled frontend, Spring Boot security and controllers, services, persistence layers, MySQL, Gemini, SMTP and Apache PDFBox.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#526b80"/></marker>
+    <marker id="arrowBack" markerWidth="10" markerHeight="10" refX="2" refY="5" orient="auto"><path d="M10 0L0 5L10 10Z" fill="#526b80"/></marker>
+    <style>
+      text{font-family:Arial,sans-serif;fill:#17324d}.title{font-size:34px;font-weight:700}.subtitle{font-size:18px;fill:#526b80}.group{fill:#fff;stroke:#9cafbd;stroke-width:2;stroke-dasharray:9 7}.group-title{font-size:19px;font-weight:700;fill:#536c80}.node{fill:#edf4f8;stroke:#6f8ba2;stroke-width:2}.client{fill:#eaf4f1;stroke:#557f72;stroke-width:2}.data{fill:#fff4e5;stroke:#bd9152;stroke-width:2}.external{fill:#f3eef9;stroke:#8e78a8;stroke-width:2}.label{font-size:18px;font-weight:700;text-anchor:middle}.small{font-size:15px;fill:#526b80;text-anchor:middle}.line{fill:none;stroke:#526b80;stroke-width:2.5;marker-end:url(#arrow)}.reply{fill:none;stroke:#526b80;stroke-width:2;stroke-dasharray:7 6;marker-end:url(#arrowBack)}.caption{font-size:15px;fill:#536c80}
+    </style>
+  </defs>
+  <rect width="1600" height="1120" fill="#fff"/>
+  <text class="title" x="60" y="65">Figure 4.1  System Architecture</text>
+  <text class="subtitle" x="60" y="98">Browser-based learning interface with Spring Boot services, relational persistence and external integrations</text>
+
+  <rect class="group" x="40" y="155" width="565" height="515" rx="18"/>
+  <text class="group-title" x="65" y="190">CLIENT</text>
+  <rect class="client" x="80" y="350" width="205" height="105" rx="14"/>
+  <text class="label" x="182" y="391">Student browser</text>
+  <text class="small" x="182" y="420">user interaction</text>
+  <rect class="client" x="350" y="350" width="215" height="105" rx="14"/>
+  <text class="label" x="457" y="391">Frontend UI</text>
+  <text class="small" x="457" y="420">HTML, CSS, JavaScript</text>
+  <path class="line" d="M285 402H350"/>
+  <text class="caption" x="318" y="385" text-anchor="middle">uses</text>
+  <path class="line" d="M457 350V265H695"/>
+  <text class="caption" x="565" y="250" text-anchor="middle">requests static files</text>
+  <path class="reply" d="M695 225H600V315H457V350"/>
+  <text class="caption" x="565" y="302" text-anchor="middle">HTML, CSS, JS</text>
+  <path class="line" d="M565 410H655V405H695"/>
+  <text class="caption" x="625" y="393" text-anchor="middle">HTTP API</text>
+
+  <rect class="group" x="650" y="155" width="535" height="515" rx="18"/>
+  <text class="group-title" x="675" y="190">SPRING BOOT APPLICATION</text>
+  <rect class="node" x="695" y="210" width="445" height="70" rx="12"/>
+  <text class="label" x="917" y="254">Bundled static page host</text>
+  <rect class="node" x="695" y="330" width="445" height="70" rx="12"/>
+  <text class="label" x="917" y="374">Spring Security session and CSRF</text>
+  <rect class="node" x="695" y="425" width="445" height="70" rx="12"/>
+  <text class="label" x="917" y="469">REST controllers</text>
+  <rect class="node" x="695" y="520" width="445" height="70" rx="12"/>
+  <text class="label" x="917" y="564">Application services</text>
+  <rect class="node" x="695" y="610" width="445" height="42" rx="10"/>
+  <text class="small" x="917" y="637">Apache PDFBox text extraction library</text>
+  <path class="line" d="M917 400V425"/>
+  <text class="caption" x="986" y="418">authorized requests</text>
+  <path class="line" d="M917 495V520"/>
+  <text class="caption" x="980" y="515">dispatches</text>
+  <path class="line" d="M820 590V610"/>
+  <text class="caption" x="770" y="606" text-anchor="end">PDF uploads</text>
+
+  <rect class="group" x="1215" y="155" width="345" height="515" rx="18"/>
+  <text class="group-title" x="1240" y="190">DATA ACCESS</text>
+  <rect class="data" x="1250" y="280" width="275" height="82" rx="12"/>
+  <text class="label" x="1387" y="315">Spring Data JPA</text>
+  <text class="small" x="1387" y="340">repositories</text>
+  <rect class="data" x="1250" y="410" width="275" height="82" rx="12"/>
+  <text class="label" x="1387" y="445">JPA and Hibernate</text>
+  <text class="small" x="1387" y="470">ORM and SQL</text>
+  <ellipse class="data" cx="1387" cy="577" rx="130" ry="48"/>
+  <text class="label" x="1387" y="583">MySQL smart_ai_buddy</text>
+  <path class="line" d="M1140 555H1195V321H1250"/>
+  <text class="caption" x="1207" y="306" text-anchor="middle">repository calls</text>
+  <path class="line" d="M1387 362V410"/>
+  <text class="caption" x="1445" y="393">entities</text>
+  <path class="line" d="M1387 492V529"/>
+  <text class="caption" x="1442" y="517">SQL</text>
+
+  <rect class="group" x="285" y="740" width="1050" height="300" rx="18"/>
+  <text class="group-title" x="310" y="777">EXTERNAL SERVICES</text>
+  <rect class="external" x="390" y="845" width="330" height="115" rx="14"/>
+  <text class="label" x="555" y="890">Gemini API</text>
+  <text class="small" x="555" y="920">chat, tutor and quiz generation</text>
+  <rect class="external" x="900" y="845" width="330" height="115" rx="14"/>
+  <text class="label" x="1065" y="890">SMTP email service</text>
+  <text class="small" x="1065" y="920">verification and reset email</text>
+  <path class="line" d="M760 590V700H555V845"/>
+  <text class="caption" x="630" y="692" text-anchor="middle">AI requests</text>
+  <path class="line" d="M900 590V720H1065V845"/>
+  <text class="caption" x="1010" y="712" text-anchor="middle">email delivery</text>
+  <text class="small" x="800" y="1005">PDFBox runs inside the Spring Boot process; provider replies return through services and controllers.</text>
+</svg>

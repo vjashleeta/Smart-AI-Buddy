@@ -9,9 +9,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+
 import com.smartai.buddy.entity.User;
+import com.smartai.buddy.repository.EmailVerificationCodeRepository;
 import com.smartai.buddy.repository.UserRepository;
+import com.smartai.buddy.service.VerificationEmailSender;
 import java.util.UUID;
+import org.mockito.ArgumentCaptor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +27,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +44,13 @@ class AuthenticationIntegrationTests {
 	private UserRepository userRepository;
 
 	@Autowired
+	private EmailVerificationCodeRepository verificationCodeRepository;
+
+	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@MockitoBean
+	private VerificationEmailSender verificationEmailSender;
 
 	private String email;
 
@@ -48,6 +61,8 @@ class AuthenticationIntegrationTests {
 
 	@AfterEach
 	void cleanUp() {
+		userRepository.findByCollegeEmail(email)
+			.ifPresent(user -> verificationCodeRepository.deleteByUser_Id(user.getId()));
 		userRepository.deleteByCollegeEmail(email);
 	}
 
@@ -60,6 +75,16 @@ class AuthenticationIntegrationTests {
 					{"name":"Login Test","email":"%s","password":"securePass123"}
 					""".formatted(email)))
 			.andExpect(status().isCreated());
+		ArgumentCaptor<String> verificationCode = ArgumentCaptor.forClass(String.class);
+		verify(verificationEmailSender).sendVerificationCode(eq(email), verificationCode.capture());
+		org.junit.jupiter.api.Assertions.assertTrue(verificationCode.getValue().matches("\\d{8}"));
+		mockMvc.perform(post("/api/auth/verify-email")
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("""
+					{"email":"%s","code":"%s"}
+					""".formatted(email, verificationCode.getValue())))
+			.andExpect(status().isNoContent());
 
 		MockHttpSession session = new MockHttpSession();
 		String oldSessionId = session.getId();
@@ -74,6 +99,24 @@ class AuthenticationIntegrationTests {
 
 		assertNotEquals(oldSessionId, session.getId());
 		assertTrue(result.getRequest().getSession(false) != null);
+	}
+
+	@Test
+	void rejectsLoginForUnverifiedAccount() throws Exception {
+		mockMvc.perform(post("/api/auth/register")
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("""
+					{"name":"Login Test","email":"%s","password":"securePass123"}
+					""".formatted(email)))
+			.andExpect(status().isCreated());
+
+		mockMvc.perform(post("/api/auth/login")
+				.with(csrf())
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(loginRequest(email, "securePass123")))
+			.andExpect(status().isUnauthorized())
+			.andExpect(jsonPath("$.message").value("Invalid email or password."));
 	}
 
 	@Test
@@ -130,6 +173,12 @@ class AuthenticationIntegrationTests {
 		mockMvc.perform(get("/pages/login.html"))
 			.andExpect(status().isOk());
 		mockMvc.perform(get("/pages/register.html"))
+			.andExpect(status().isOk());
+		mockMvc.perform(get("/pages/verify-email.html"))
+			.andExpect(status().isOk());
+		mockMvc.perform(get("/pages/forgot-password.html"))
+			.andExpect(status().isOk());
+		mockMvc.perform(get("/pages/reset-password.html"))
 			.andExpect(status().isOk());
 
 		persistUser();

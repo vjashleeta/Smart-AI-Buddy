@@ -1,0 +1,118 @@
+classDiagram
+direction LR
+
+class AuthenticationController
+class RegistrationController
+class ChatController
+class QuizController
+class PlannerController
+class StudentAnalyticsController
+class StudentSettingsController
+class LearningActivityController
+class ResourceRecommendationController
+
+class RegistrationService
+class EmailVerificationService
+class PasswordResetService
+class ChatHistoryService
+class ChatService
+class QuizService
+class PlannerService
+class StudentAnalyticsService
+class StudentSettingsService
+class LearningActivityService
+class ResourceRecommendationService
+
+class UserRepository
+class EmailVerificationCodeRepository
+class PasswordResetTokenRepository
+class ChatConversationRepository
+class ChatMessageRepository
+class QuizAttemptRepository
+class StudyMaterialRepository
+class StudyPlanRepository
+class StudySessionRepository
+class LearningActivityRepository
+interface JpaRepository
+interface PasswordEncoder
+class SecurityConfiguration
+class PasswordEncoderConfiguration
+class ChatConfiguration
+class TimeConfiguration
+
+class User
+class EmailVerificationCode
+class PasswordResetToken
+class ChatConversation
+class ChatMessage
+class StudyMaterial
+class QuizConcept
+class QuizAttempt
+class QuizAttemptQuestion
+class QuizAnswer
+class StudyPlan
+class StudySession
+class LearningActivity
+class VerificationPurpose
+class ChatMessageRole
+class ChatMessageStatus
+class LearningActivityType
+
+RegistrationController ..> RegistrationService : delegates
+RegistrationController ..> EmailVerificationService : verifies email
+AuthenticationController ..> PasswordResetService : resets password
+ChatController ..> ChatHistoryService : submits conversation
+ChatHistoryService ..> ChatService : requests answer
+QuizController ..> QuizService : manages quiz
+PlannerController ..> PlannerService : manages planner
+StudentAnalyticsController ..> StudentAnalyticsService : reads metrics
+StudentSettingsController ..> StudentSettingsService : updates account
+LearningActivityController ..> LearningActivityService : tracks activity
+ResourceRecommendationController ..> ResourceRecommendationService : finds resources
+
+RegistrationService ..> UserRepository : stores account
+RegistrationService ..> EmailVerificationService : issues code
+EmailVerificationService ..> UserRepository : finds account
+EmailVerificationService ..> EmailVerificationCodeRepository : stores code
+PasswordResetService ..> UserRepository : updates account
+PasswordResetService ..> PasswordResetTokenRepository : stores token
+ChatHistoryService ..> UserRepository : finds student
+ChatHistoryService ..> ChatConversationRepository : stores conversation
+ChatHistoryService ..> ChatMessageRepository : stores messages
+QuizService ..> StudyMaterialRepository : accesses materials
+QuizService ..> QuizAttemptRepository : stores attempts
+QuizService ..> StudyMaterial : creates material
+PlannerService ..> StudyPlanRepository : stores plan
+PlannerService ..> StudySessionRepository : stores sessions
+LearningActivityService ..> LearningActivityRepository : stores activity
+StudentAnalyticsService ..> QuizAttemptRepository : reads quiz history
+StudentAnalyticsService ..> StudyPlanRepository : reads plans
+StudentAnalyticsService ..> LearningActivityRepository : reads activity
+StudentSettingsService ..> UserRepository : updates profile
+ResourceRecommendationService ..> QuizService : reads quiz evidence
+
+JpaRepository <|.. UserRepository : extended by
+JpaRepository <|.. StudyMaterialRepository : extended by
+JpaRepository <|.. QuizAttemptRepository : extended by
+
+User "1" --> "0..*" ChatConversation : owns
+ChatConversation "1" --> "0..*" ChatMessage : contains
+User "1" --> "0..*" LearningActivity : records
+User "1" --> "0..1" StudyPlan : owns
+StudyPlan "1" --> "0..*" StudySession : schedules
+User "1" --> "0..*" StudyMaterial : owns
+StudyMaterial "1" --> "0..*" QuizConcept : contains
+User "1" --> "0..*" QuizAttempt : takes
+QuizAttempt "1" --> "0..*" QuizAttemptQuestion : includes
+QuizConcept "1" --> "0..*" QuizAttemptQuestion : supplies
+QuizAttemptQuestion "1" --> "0..1" QuizAnswer : answer
+User "1" --> "0..*" EmailVerificationCode : has codes
+User "1" --> "0..1" PasswordResetToken : has token
+EmailVerificationCode ..> VerificationPurpose : purpose
+ChatMessage ..> ChatMessageRole : role
+ChatMessage ..> ChatMessageStatus : status
+LearningActivity ..> LearningActivityType : activity kind
+
+PasswordEncoderConfiguration ..> PasswordEncoder : provides encoder
+ChatConfiguration ..> ChatService : provides client builder
+TimeConfiguration ..> PlannerService : provides clock
